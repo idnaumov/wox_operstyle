@@ -28,11 +28,24 @@ mp.events.addCommand('veh', (player, _, id, veh, color1, color2) => {
     let pos;
     pos = target.position;
     var AdminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z), {
-        numberPlate: "A777AA77",
+        numberPlate: "X777AM77",
     });
     AdminVeh.setColor(parseInt(color1), parseInt(color2));
     player.setVariable('AdminVeh' + player.id, AdminVeh);
-    target.putIntoVehicle(AdminVeh, 0)
+    player.putIntoVehicle(AdminVeh, 0)
+})
+
+mp.events.addCommand('setvehcomp', (player, _, id, compid) => {
+    if(player.getVariable('adminlvl') < 9) return;
+    if (id == undefined || compid == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /setvehcomp [id] [ComponentID]');
+    let vehicle = player.vehicle;
+    vehicle.setMod(parseInt(id), parseInt(compid));
+})
+
+mp.events.addCommand('setweather', (player, _, weatherID) => {
+    if(player.getVariable('adminlvl') < 9) return;
+    if (weatherID == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /setweather [id]');
+    mp.world.setWeatherTransition(parseInt(weatherID));
 })
 
 mp.events.addCommand('setspeed', (player) => {

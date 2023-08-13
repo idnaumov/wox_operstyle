@@ -31,6 +31,7 @@ var HUD = new Vue({
             { key: '`', text: 'Показать/Скрыть курсор' },
             { key: 'I', text: 'Инвентарь' },
             { key: 'N', text: 'Голосовой чат' },
+            { key: 'B', text: 'Управление двигателем' },
         ],
         usebutton: {
             active: false,

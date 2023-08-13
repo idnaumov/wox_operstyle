@@ -56,7 +56,7 @@ mp.events.add('render', () => {
     // }
     mp.game.vehicle.setExperimentalAttachmentSyncEnabled(true);
     // Hide default hud component
-    mp.discord.update('Играет на STAGE MODE FOR SALE', 'Пространствует по штату stage')
+    mp.discord.update('Играет в RAGE:MP', 'Странствует по миру WOX')
     //
     mp.game.audio.setRadioToStationName("OFF");
     mp.game.audio.setUserRadioControlEnabled(false);

@@ -22,6 +22,7 @@ require('./systems/events/voice');
 require('./systems/events/weaponcompsync');
 require('./systems/events/houses');
 require('./systems/events/menu');
+require('./systems/events/cars');
 // 
 require('./systems/utils/3dCamera');
 require('./systems/utils/snake');
@@ -93,8 +94,18 @@ function controlEngineState()
     currentVehicle.setEngineOn(!currentVehicle.getIsEngineRunning(), false, false);
     console_log(!currentVehicle.getIsEngineRunning())
 }
-mp.keys.bind(0xA2, false, function () { // ctrl key
+mp.keys.bind(0x42, false, function () { // B key
     controlEngineState();
+})
+
+let showHud = true
+mp.keys.bind(0x75, false, function () { // F6 key
+    if (showHud == true ) {
+        mp.events.call("HUD_setShow::CLIENT", false);
+    } else {
+        mp.events.call("HUD_setShow::CLIENT", true);
+    }
+    showHud = !showHud
 })
 
 
