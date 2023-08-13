@@ -1,0 +1,13 @@
+bin/enc.dat
+/plugins
+/node_modules
+/maps
+/dotnet
+/bin
+BugTrap-x64.dll
+conf.json
+linux_x64.tar.gz
+package-lock.json
+ragemp-server
+ragemp-server.exe
+/client_packages/game_resources
