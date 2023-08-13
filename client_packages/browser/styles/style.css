@@ -1222,36 +1222,6 @@ body {
       #HUD_main .project_name {
         font-weight: 700;
       }
-  #HUD_main .right_up .money_wrapper {
-    position: absolute;
-    top: 7vh;
-    display: block;
-    right: 0vh;
-    text-align: right; }
-    #HUD_main .right_up .money_wrapper h1 {
-      font-family: Gilroy;
-      font-style: normal;
-      font-weight: bold;
-      font-size: 2.2vh;
-      color: #ffffff;
-      text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25); }
-    #HUD_main .right_up .money_wrapper .money-bank {
-      display: flex;
-      align-items: center;
-      text-align: right;
-      width: 20vh;
-      justify-content: flex-end; }
-      #HUD_main .right_up .money_wrapper .money-bank p {
-        font-family: Gilroy;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 2.2vh;
-        color: #ffffff;
-        opacity: 0.7;
-        text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25); }
-      #HUD_main .right_up .money_wrapper .money-bank img {
-        opacity: 0.7;
-        margin-right: 0.5vh; }
 #HUD_main .hints {
   right: 2vh;
   text-align: right;
@@ -1268,19 +1238,19 @@ body {
       height: 2.5vh;
       border: 2px solid rgba(255, 255, 255, 0.2);
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%; }
+      border-radius: 10%; }
       #HUD_main .hints .hint_wrapper .hint p {
         font-family: Gilroy;
         font-style: normal;
         font-weight: bold;
-        font-size: 1.3vh;
+        font-size: 1.5vh;
         color: #ffffff; }
     #HUD_main .hints .hint_wrapper h1 {
       margin-right: 2vh;
       font-family: Gilroy;
       font-style: normal;
       font-weight: 400;
-      font-size: 1.1vh;
+      font-size: 1.3vh;
       color: rgba(255, 255, 255, 0.9); }
 #HUD_main .notify {
   position: absolute;
@@ -1320,6 +1290,37 @@ body {
     opacity: 0; }
 #HUD_main .location {
   position: absolute; }
+  #HUD_main .location .money_wrapper {
+    margin-bottom: 1vh;
+    display: block;
+    left: 0vh;
+    text-align: left; }
+    #HUD_main .location .money_wrapper h1 {
+      font-family: Gilroy;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 2.2vh;
+      color: #ffffff;
+      text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25); }
+    #HUD_main .location .money_wrapper .money-bank {
+      flex-wrap: wrap;
+      align-content: center;
+      display: flex;
+      align-items: center;
+      text-align: left;
+      justify-content: flex-start; }
+      #HUD_main .location .money_wrapper .money-bank p {
+        font-family: Gilroy;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.6vh;
+        color: #ffffff;
+        text-align: left;
+        opacity: 1;
+        text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25); }
+      #HUD_main .location .money_wrapper .money-bank img {
+        opacity: 1;
+        margin-right: 1vh; }
   #HUD_main .location .location_wrapper {
     display: flex; }
     #HUD_main .location .location_wrapper .location_text_wrapper {

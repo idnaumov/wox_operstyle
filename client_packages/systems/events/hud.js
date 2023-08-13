@@ -73,7 +73,7 @@ mp.events.add('render', () => {
     let zone_hash = mp.game.pathfind.getStreetNameAtCoord(player.position.x, player.position.y, player.position.z, 0, 0)
     let zone = mp.game.ui.getStreetNameFromHashKey(zone_hash.streetName);
 
-    browser.call('HUD_updateLocation::CEF', getMinimapTopRight().y + 190, getMinimapTopRight().x + 15, location, zone)
+    browser.call('HUD_updateLocation::CEF', getMinimapTopRight().y + 125, getMinimapTopRight().x + 15, location, zone)
 
     let vehicle = player.vehicle;
     if (player.vehicle && player.vehicle.getPedInSeat(-1) === player.handle) {

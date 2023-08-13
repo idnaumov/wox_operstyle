@@ -27,11 +27,13 @@ var HUD = new Vue({
             zone: ''
         },
         hints: [
-            { key: 'F6', text: 'Скрыть худ' },
+            { key: 'F6', text: 'Скрыть подсказки/худ' },
             { key: '`', text: 'Показать/Скрыть курсор' },
             { key: 'I', text: 'Инвентарь' },
             { key: 'N', text: 'Голосовой чат' },
-            { key: 'B', text: 'Управление двигателем' },
+            { key: 'L', text: 'Замок ТС' },
+            { key: 'B', text: 'Зажигание ТС' },
+            { key: 'J', text: 'Ремень безопасности' },
         ],
         usebutton: {
             active: false,

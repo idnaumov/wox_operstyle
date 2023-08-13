@@ -531,13 +531,7 @@
         <div class="right_up">
             <div class="vignette"></div>
             <div class="logo_and_info">
-                <div class="money_wrapper">
-                    <h1>${{ money }}</h1>
-                    <div class="money-bank">
-                        <img src="./systems/Hud/img/bank.svg" alt="">
-                        <p>${{ bank }}</p>
-                    </div>
-                </div>
+
                 <div class="info_server">
                     <!-- <div class="info_items">
                         <img src="./systems/Hud/img/login.svg" alt="">
@@ -581,6 +575,16 @@
             </transition-group>
         </div>
         <div class="location" v-bind:style="{ top: locationPosition.top + 'px', left: locationPosition.left + 'px'}">
+            <div class="money_wrapper">
+                <div class="money-bank">
+                    <img src="./systems/Hud/img/money.svg" alt="" width="22" height="22" style="">
+                    <p>${{ money }}</p>
+                </div>
+                <div class="money-bank">
+                    <img src="./systems/Hud/img/bank.svg" alt="" width="24" height="24" style="">
+                    <p>${{ bank }}</p>
+                </div>
+            </div>
             <div class="location_wrapper">
                 <img src="./systems/Hud/img/compass.svg" alt="">
                 <div class="location_text_wrapper">
