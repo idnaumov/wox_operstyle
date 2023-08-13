@@ -1,4 +1,4 @@
 # wox_operstyle
 woxoperstyle
 
-#FERTAK IDI NAHUI
+# FERTAK IDI NAHUI
