@@ -1,2 +1,2 @@
 # wox_operstyle
-woxoperstyle
+woxoperstyle DNAUMOV PIDOR
