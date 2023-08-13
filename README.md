@@ -1,2 +1,4 @@
 # wox_operstyle
-woxoperstyle DNAUMOV PIDOR
+woxoperstyle
+
+#FERTAK IDI NAHUI
