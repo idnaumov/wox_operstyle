@@ -205,3 +205,10 @@ mp.events.addCommand('dl', (player) => {
     if(player.getVariable('adminlvl') < 1) return;
     player.setVariable("render_info_cars", !player.getVariable('render_info_cars'));
 });
+
+mp.events.addCommand('settempskin', (player, _, hash) => {
+    if(player.getVariable('adminlvl') < 3) return;
+    if (hash == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /settempskin [skin hash]')
+    chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}a_c_chimp')
+    player.model = mp.joaat(hash)
+});
