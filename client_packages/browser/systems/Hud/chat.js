@@ -17,9 +17,12 @@ Vue.directive("focus", {
 var Chat = new Vue({
     el: '#HUD_chat',
     data: {
-        active: false,
+        active: true,
         message: '',
-        messages: [],
+        messages: [
+            "fghfghfghfghfgh",
+            "Я хуй",
+        ],
         historyMessages: [],
         historyCount: 0,
         open: false,

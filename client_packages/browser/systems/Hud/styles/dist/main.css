@@ -1,7 +1,3 @@
-body {
-  background-color: black;
-}
-
 #HUD_main .right_up {
   position: absolute;
   right: 4.5vh;
@@ -30,7 +26,7 @@ body {
 }
 #HUD_main .right_up .logo .servername p.name {
   font-family: Gilroy, sans-serif;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -41,7 +37,7 @@ body {
   color: #FFF;
   text-align: center;
   font-family: Gilroy;
-  font-size: 0.875rem;
+  font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -93,7 +89,7 @@ body {
   color: #DFDFDF;
   text-align: right;
   font-family: Gilroy;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -123,7 +119,7 @@ body {
   color: #FFF;
   text-align: right;
   font-family: Gilroy;
-  font-size: 1rem;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -139,11 +135,147 @@ body {
   color: #FFF;
   text-align: center;
   font-family: Gilroy;
-  font-size: 1.25rem;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   border-radius: 5px;
   border: 1.5px solid #E41E6B;
   background: rgba(0, 0, 0, 0.5);
+}
+#HUD_main #speedometer {
+  position: absolute;
+  bottom: 4.5vh;
+  right: 4.5vh;
+}
+#HUD_main #speedometer .fuel {
+  display: flex;
+  justify-content: space-between;
+}
+#HUD_main #speedometer .fuel .speedmask {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 1.45vh;
+  font-style: italic;
+  font-weight: 600;
+  line-height: normal;
+}
+#HUD_main #speedometer .fuel span {
+  color: #FFF;
+  color: #FFF;
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 1.45vh;
+  font-style: italic;
+  font-weight: 600;
+  line-height: normal;
+  margin-right: 5px;
+}
+#HUD_main .speedgear {
+  display: flex;
+  align-items: center;
+}
+#HUD_main .elements {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+#HUD_main .elements .car-lock.active {
+  fill: #E41E6B;
+  opacity: 1;
+}
+#HUD_main .elements .seat-belt.active {
+  fill: #E41E6B;
+  opacity: 1;
+}
+#HUD_main .elements .engine.active {
+  fill: #E41E6B;
+  opacity: 1;
+}
+#HUD_main .speed {
+  color: #E41E6B;
+  font-family: Gilroy;
+  font-size: 4rem;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 3.5rem;
+  height: auto;
+}
+#HUD_main .gearbox {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  background: #FFF;
+  color: #000;
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.location {
+  position: absolute;
+}
+.location .money_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+.location .money-bank {
+  display: flex;
+  align-items: center;
+}
+.location .money-bank p {
+  margin-left: 10px;
+  color: #FFF;
+  font-family: Gilroy;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.location .location_wrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.location .location_wrapper .location_text_wrapper h1 {
+  color: #FFF;
+  font-family: Gilroy;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.location .location_wrapper .location_text_wrapper p {
+  color: #DCDCDC;
+  font-family: Gilroy;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.location .time_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.location .time_wrapper span {
+  color: #FFF;
+  font-family: Gilroy;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+}
+.location .time_wrapper p {
+  color: #DCDCDC;
+  font-family: Gilroy;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
 }

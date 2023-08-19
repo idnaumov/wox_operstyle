@@ -7,8 +7,8 @@ var HUD = new Vue({
         server: {
             online: 99,
             id: 1,
-            time: '1',
-            date: '',
+            time: '19:40',
+            date: '19.08.2023',
         },
         player: {
             bonus: 1,
@@ -26,8 +26,8 @@ var HUD = new Vue({
         locationPosition: {
             top: 500,
             left: 130,
-            location: '',
-            zone: ''
+            location: 'Вайнвуд-хиллз',
+            zone: 'Вайнвуд-хиллз'
         },
         hints: [
             { key: 'F6', text: 'Скрыть подсказки/худ' },
@@ -42,6 +42,17 @@ var HUD = new Vue({
             active: false,
             button: 'E',
             text: 'Используйте для взаимодействия',
+        },
+
+        activeSpeedometer: true,
+        carElements: {
+            carlock: true,
+            seatbelt: false,
+            engine: false,
+        },
+        speedElements: {
+            speed: '000',
+            gear: "N"
         }
     },
     methods: {

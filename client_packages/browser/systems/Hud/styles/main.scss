@@ -1,4 +1,4 @@
-body {background-color: black;}
+// body {background-color: black;}
 
 #HUD_main {
     .right_up {
@@ -32,7 +32,7 @@ body {background-color: black;}
 
             .servername p.name {
                 font-family: Gilroy, sans-serif;
-                font-size: 1.25rem;
+                font-size: 20px;
                 font-style: normal;
                 font-weight: 700;
                 line-height: normal;
@@ -44,7 +44,7 @@ body {background-color: black;}
                 color: #FFF;
                 text-align: center;
                 font-family: Gilroy;
-                font-size: 0.875rem;
+                font-size: 14px;
                 font-style: normal;
                 font-weight: 500;
                 line-height: normal;
@@ -102,7 +102,7 @@ body {background-color: black;}
                 color: #DFDFDF;
                 text-align: right;
                 font-family: Gilroy;
-                font-size: 1.25rem;
+                font-size: 20px;
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
@@ -137,7 +137,7 @@ body {background-color: black;}
                 color: #FFF;
                 text-align: right;
                 font-family: Gilroy;
-                font-size: 1rem;
+                font-size: 16px;
                 font-style: normal;
                 font-weight: 500;
                 line-height: normal;
@@ -154,7 +154,7 @@ body {background-color: black;}
                 color: #FFF;
                 text-align: center;
                 font-family: Gilroy;
-                font-size: 1.25rem;
+                font-size: 20px;
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
@@ -162,6 +162,164 @@ body {background-color: black;}
                 border: 1.5px solid #E41E6B;
                 background: rgba(0, 0, 0, 0.50);
             }
+        }
+    }
+
+    #speedometer {
+        position: absolute;
+        bottom: 4.5vh;
+        right: 4.5vh;
+
+        .fuel {
+            display: flex;
+            justify-content: space-between;
+
+            .speedmask {
+                color: rgba(255, 255, 255, 0.50);
+                text-align: center;
+                font-family: Gilroy;
+                font-size: 1.45vh;
+                font-style: italic;
+                font-weight: 600;
+                line-height: normal;
+            }
+
+            span { 
+                color: #FFF;
+                color: #FFF;
+                text-align: center;
+                font-family: Gilroy;
+                font-size: 1.45vh;
+                font-style: italic;
+                font-weight: 600;
+                line-height: normal;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .speedgear {
+        display: flex;
+        align-items: center;
+    }
+
+    .elements {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-bottom: 5px;
+    
+        .car-lock.active {
+            fill: #E41E6B;
+            opacity: 1;
+        }
+        
+        .seat-belt.active {
+            fill: #E41E6B;
+            opacity: 1;
+        }
+
+        .engine.active {
+            fill: #E41E6B;
+            opacity: 1;
+        }
+    }
+
+    .speed {
+        color: #E41E6B;
+        font-family: Gilroy;
+        font-size: 4rem;
+        font-style: italic;
+        font-weight: 700;
+        line-height: 3.5rem;
+        height: auto;
+    }
+
+    .gearbox {
+        margin-left: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px;
+        background: #FFF;
+        color: #000;
+        text-align: center;
+        font-family: Gilroy;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+    
+}
+
+.location {
+    position: absolute;
+
+    .money_wrapper {
+        display: flex;
+        flex-direction: column;
+        //gap: 0.92vh;
+        margin-top: 10px;
+    }
+
+    .money-bank {
+        display: flex;
+        align-items: center;
+
+        p {
+            margin-left: 10px;
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+
+    .location_wrapper {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .location_text_wrapper h1{
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .location_text_wrapper p {
+            color: #DCDCDC;
+            font-family: Gilroy;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+
+    .time_wrapper {
+        display: flex;
+        flex-direction: column;
+
+        span {
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        p {
+            color: #DCDCDC;
+            font-family: Gilroy;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
         }
     }
 }
