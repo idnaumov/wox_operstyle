@@ -1,0 +1,149 @@
+body {
+  background-color: black;
+}
+
+#HUD_main .right_up {
+  position: absolute;
+  right: 4.5vh;
+  top: 4.5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+#HUD_main .right_up .vignette {
+  position: absolute;
+  right: -150px;
+  top: -150px;
+  width: 262px;
+  height: 193px;
+  border-radius: 262px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+  filter: blur(50px);
+  z-index: -1;
+}
+#HUD_main .right_up .logo {
+  display: flex;
+  align-items: center;
+}
+#HUD_main .right_up .logo .servername {
+  margin-right: 10px;
+}
+#HUD_main .right_up .logo .servername p.name {
+  font-family: Gilroy, sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #FFF;
+  text-align: right;
+}
+#HUD_main .right_up .logo .servername p.subname {
+  color: #FFF;
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+#HUD_main .right_up .info {
+  display: flex;
+  gap: 10px;
+  margin-top: 11px;
+  height: 21px;
+  border-radius: 12.5px;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0px 5px;
+  padding-right: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-end;
+  justify-content: space-between;
+}
+#HUD_main .right_up .info .online {
+  display: flex;
+  align-items: center;
+  font-family: Gilroy;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #FFF;
+}
+#HUD_main .right_up .info .id {
+  font-family: Gilroy;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  color: #FFF;
+}
+#HUD_main .right_up .bonus {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 250px;
+  height: 44px;
+  background: url("../img/bonus_bg.svg");
+  position: relative;
+  right: -30px;
+}
+#HUD_main .right_up .bonus p {
+  color: #DFDFDF;
+  text-align: right;
+  font-family: Gilroy;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+#HUD_main .right_up .bonus .time {
+  color: #fff;
+}
+#HUD_main .hints {
+  position: absolute;
+  right: 4.5vh;
+  top: auto;
+}
+#HUD_main .hints .hints-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+#HUD_main .hints .hint-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+#HUD_main .hints .hint-item p {
+  color: #FFF;
+  text-align: right;
+  font-family: Gilroy;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+#HUD_main .hints .hint-item span {
+  margin-left: 10px;
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  min-width: 25px;
+  min-height: 25px;
+  color: #FFF;
+  text-align: center;
+  font-family: Gilroy;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border-radius: 5px;
+  border: 1.5px solid #E41E6B;
+  background: rgba(0, 0, 0, 0.5);
+}

@@ -3,12 +3,15 @@ var HUD = new Vue({
     el: '#HUD_main',
     data: {
         //active: false,
-        active: false,
+        active: true,
         server: {
             online: 99,
-            login: '#31',
+            id: 1,
             time: '1',
             date: '',
+        },
+        player: {
+            bonus: 1,
         },
         money: 52,
         bank: 1222222,

@@ -530,10 +530,39 @@
     <div id="HUD_main" v-show="active" v-cloak>
         <div class="right_up">
             <div class="vignette"></div>
+            <div class="logo">
+                <div class="servername">
+                    <p class="name">WOX</p>
+                    <p class="subname">OPERSTYLE</p>
+                </div>
+                <img src="./systems/Hud/img/logo.svg" alt="" srcset="">
+            </div>
+            <div class="info">
+                <div class="online"><img src="./systems/Hud/img/online.svg" alt="">{{server.online}}</div>
+                <div class="id">ID: {{server.id}}</div>
+            </div>
+            <div class="bonus" v-if="player.bonus == 1">
+                <p>До колеса удачи</p>
+                <p class="time">3:00</p>
+            </div>
+        </div>
+
+        <div class="hints">
+            <ul class="hints-list">
+                <li class="hint-item" v-for="item in hints">
+                    <p>{{item.text}}</p>
+                    <span>{{item.key}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--<div class="right_up">
+            <div class="vignette"></div>
             <div class="logo_and_info">
 
                 <div class="info_server">
-                    <!-- <div class="info_items">
+                     <div class="info_items">
                         <img src="./systems/Hud/img/login.svg" alt="">
                         <p>#{{server.login}}</p>
                     </div> -->
@@ -543,7 +572,7 @@
                             <p>{{ server.time }}</p>
                             <span>{{ server.date }}</span>
                         </div>
-                    </div> -->
+                    </div> 
                     <div class="logo_text">
                         <span class="project_name">OPER STYLE</span>
                         <span class="account_id">ID: {{server.login}}</span>
@@ -592,10 +621,10 @@
                     <p>{{ locationPosition.zone }}</p>
                 </div>
             </div>
-            <!-- <div class="player_indicators">
+            <div class="player_indicators">
                 <img src="./systems/Hud/img/eat.svg" alt="">
                 <img src="./systems/Hud/img/water.svg" alt="">
-            </div> -->
+            </div>
         </div>
         <transition name="slide-fade">
             <div class="use-button" v-show="usebutton.active">
@@ -607,7 +636,7 @@
                 </div>
             </div>
         </transition>
-    </div>
+    </div> -->
     <!-- Спидометр -->
     <div id="speedometer" v-show="active" v-cloak>
         <img src="./systems/Hud/img/speed/bg.svg" class="bg">
