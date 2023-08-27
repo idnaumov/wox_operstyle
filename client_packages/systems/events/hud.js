@@ -74,6 +74,8 @@ mp.events.add('render', () => {
     let zone = mp.game.ui.getStreetNameFromHashKey(zone_hash.streetName);
 
     browser.call('HUD_updateLocation::CEF', getMinimapTopRight().y + 100, getMinimapTopRight().x + 15, location, zone)
+    browser.execute(`HUD.notifyPos.top = ${getMinimapTopRight().y - 300}`)
+    browser.execute(`HUD.notifyPos.width = ${getMinimapTopRight().x - 65}`)
 
     let vehicle = player.vehicle;
     if (player.vehicle && player.vehicle.getPedInSeat(-1) === player.handle) {
@@ -82,15 +84,24 @@ mp.events.add('render', () => {
         }
         let vel = vehicle.getSpeed();
         let speed = Math.round(parseInt(vel) * 3.6);
+
+        let gear = vehicle.gear;
+        console.log(gear)
+        if (vel == 0) {
+            gear = 'N';
+        } else if ( gear == 0 ) {
+            gear = 'R';
+        }
         
-        browser.execute(`HUD.speedElements.speed = ${speed}`)
+        browser.execute(`HUD.speedElements.speed = ${speed < 10 ? `'00${speed}'` : speed < 100 ? `'0${speed}'` : `'${speed}'`}`);
+
+        browser.execute(`HUD.speedElements.gear = '${gear}'`)
+        browser.execute(`HUD.carElements.engine = ${vehicle.getIsEngineRunning()}`)
     }
     else {
         browser.execute(`HUD.activeSpeedometer = false`)
     }
 
-    let engineEnabled = vehicle.getIsEngineRunning();
-    browser.execute(`HUD.carElements.engine = ${engineEnabled}`)
 
     //     
     let online = mp.players.length;

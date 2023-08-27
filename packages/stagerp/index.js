@@ -100,5 +100,16 @@ mp.world.requestIpl("vw_casino_garage");
 mp.world.requestIpl("vw_casino_carpark"); 
 mp.world.requestIpl("vw_casino_penthouse");
 
+
+let chat = require("./events/hud");
+mp.events.add('getEngineState::SERVER', (player) => {
+    let veh = player.vehicle
+    if ( veh.engine ) {
+        chat.addNotify(player, 3, "Двигатель запущен", 4000)
+    } else {
+        chat.addNotify(player, 3, "Двигатель заглушен", 4000)
+    }
+})
+
 //my apa_v_mp_h_01_a
 exports.getClearSlot = getClearSlot;

@@ -2,7 +2,7 @@
 var HUD = new Vue({
     el: '#HUD_main',
     data: {
-        active: false,
+        active: true,
         server: {
             online: 99,
             id: 1,
@@ -17,10 +17,15 @@ var HUD = new Vue({
         tweenedNumber: 0,
         //
         notify: {
-            notifys: [],
-            error_color: 'linear-gradient(89.96deg, #ff4747 0.04%, rgba(255, 71, 71, 0) 99.5%)',
-            succes_color: 'linear-gradient(89.96deg, #BAFE2A 0.04%, rgba(186, 254, 42, 0.05) 99.5%)',
-            info_color: 'linear-gradient(89.96deg, #FFE600 0.04%, rgba(201, 181, 0, 0.05) 99.5%)'
+            notifys: [
+            ],
+            error_color: '240, 32, 32',
+            succes_color: '66, 255, 0',
+            info_color: '34, 202, 255'
+        },
+        notifyPos: {
+            top: 300,
+            width: 265
         },
         locationPosition: {
             top: 500,
@@ -78,14 +83,17 @@ var HUD = new Vue({
         },
         addNotify(type, text, time) {
             var $this = this;
+            if ( this.notify.notifys.length > 3 ) {
+                this.notify.notifys.splice(0, 1);
+            }
             if (type == 1) {
-                this.notify.notifys.push({ type: 1, top: 'Успешно', color: this.notify.succes_color, text: text });
+                this.notify.notifys.push({ type: 1, color: this.notify.succes_color, text: text });
             }
             else if (type == 2) {
-                this.notify.notifys.push({ type: 2, top: 'Ошибка', color: this.notify.error_color, text: text });
+                this.notify.notifys.push({ type: 2, color: this.notify.error_color, text: text });
             }
             else if (type == 3) {
-                this.notify.notifys.push({ type: 2, top: 'Внимание', color: this.notify.info_color, text: text });
+                this.notify.notifys.push({ type: 3, color: this.notify.info_color, text: text });
             }
             // Удаление
             setTimeout(function () {

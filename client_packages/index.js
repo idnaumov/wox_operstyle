@@ -92,7 +92,7 @@ function controlEngineState()
 {
     let currentVehicle = player.vehicle;
     currentVehicle.setEngineOn(!currentVehicle.getIsEngineRunning(), false, false);
-    console_log(!currentVehicle.getIsEngineRunning())
+    mp.events.callRemote("getEngineState::SERVER", player)
 }
 mp.keys.bind(0x42, false, function () { // B key
     controlEngineState();

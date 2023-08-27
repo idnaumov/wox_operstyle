@@ -574,6 +574,16 @@
                 </div>
             </div>
         </div>
+    
+    <div class="notifications">
+        <div class="notification_wrapper" :style="{ top: notifyPos.top + 'px' }" v-for="item in notify.notifys">
+            <div class="light" :style="{ 'background': 'rgba('+item.color+', 1)', 'box-shadow': '0px 0px 10px 0px rgba('+item.color+', 0.5)' }"></div>
+            <div class="notification" :style="{ width: notifyPos.width + 'px' }">
+                <div class="text">{{item.text}}</div>
+            </div>
+        </div>
+    </div>
+
     <div class="location" :style="{ top: locationPosition.top + 'px', left: locationPosition.left + 'px'}">
             <div class="time_wrapper">
                 <div class="time-text">
