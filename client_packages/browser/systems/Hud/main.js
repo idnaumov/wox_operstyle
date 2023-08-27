@@ -2,8 +2,7 @@
 var HUD = new Vue({
     el: '#HUD_main',
     data: {
-        //active: false,
-        active: true,
+        active: false,
         server: {
             online: 99,
             id: 1,
@@ -46,7 +45,7 @@ var HUD = new Vue({
 
         activeSpeedometer: true,
         carElements: {
-            carlock: true,
+            carlock: false,
             seatbelt: false,
             engine: false,
         },
@@ -62,6 +61,7 @@ var HUD = new Vue({
             let minute = data.getMinutes();
 
             if (hour < 10) hour = "0" + hour;
+            if ( hour == 24 ) hour = "00"
             if (minute < 10) minute = "0" + minute;
             this.server.time = `${hour}:${minute}`;
         },

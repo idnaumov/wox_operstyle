@@ -1,7 +1,7 @@
 #HUD_main .right_up {
   position: absolute;
-  right: 4.5vh;
-  top: 4.5vh;
+  right: 30px;
+  top: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -26,7 +26,7 @@
 }
 #HUD_main .right_up .logo .servername p.name {
   font-family: Gilroy, sans-serif;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -37,7 +37,7 @@
   color: #FFF;
   text-align: center;
   font-family: Gilroy;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -89,7 +89,7 @@
   color: #DFDFDF;
   text-align: right;
   font-family: Gilroy;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -99,7 +99,7 @@
 }
 #HUD_main .hints {
   position: absolute;
-  right: 4.5vh;
+  right: 30px;
   top: auto;
 }
 #HUD_main .hints .hints-list {
@@ -119,7 +119,7 @@
   color: #FFF;
   text-align: right;
   font-family: Gilroy;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -135,7 +135,7 @@
   color: #FFF;
   text-align: center;
   font-family: Gilroy;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -143,30 +143,30 @@
   border: 1.5px solid #E41E6B;
   background: rgba(0, 0, 0, 0.5);
 }
-#HUD_main #speedometer {
+#HUD_main .speedometer {
   position: absolute;
-  bottom: 4.5vh;
-  right: 4.5vh;
+  bottom: 30px;
+  right: 30px;
 }
-#HUD_main #speedometer .fuel {
+#HUD_main .speedometer .fuel {
   display: flex;
   justify-content: space-between;
 }
-#HUD_main #speedometer .fuel .speedmask {
+#HUD_main .speedometer .fuel .speedmask {
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
   font-family: Gilroy;
-  font-size: 1.45vh;
+  font-size: 1rem;
   font-style: italic;
   font-weight: 600;
   line-height: normal;
 }
-#HUD_main #speedometer .fuel span {
+#HUD_main .speedometer .fuel span {
   color: #FFF;
   color: #FFF;
   text-align: center;
   font-family: Gilroy;
-  font-size: 1.45vh;
+  font-size: 1rem;
   font-style: italic;
   font-weight: 600;
   line-height: normal;
@@ -234,7 +234,7 @@
   margin-left: 10px;
   color: #FFF;
   font-family: Gilroy;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -248,7 +248,7 @@
 .location .location_wrapper .location_text_wrapper h1 {
   color: #FFF;
   font-family: Gilroy;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -256,7 +256,7 @@
 .location .location_wrapper .location_text_wrapper p {
   color: #DCDCDC;
   font-family: Gilroy;
-  font-size: 16px;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -268,14 +268,14 @@
 .location .time_wrapper span {
   color: #FFF;
   font-family: Gilroy;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 600;
 }
 .location .time_wrapper p {
   color: #DCDCDC;
   font-family: Gilroy;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-style: normal;
   font-weight: 600;
 }

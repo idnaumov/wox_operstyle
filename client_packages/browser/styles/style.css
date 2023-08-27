@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("../systems/Hud/styles/main.css");
+
 /* body {
   background: url('../systems/bg.jpg');
   background-size: cover;
 }  */
-@import url("../systems/Hud/styles/main.css");
 
 #cars .main_wrapper .body_flex .body .body_wrapper .parametr .switcher_wrapper .switcher .btn img, #cars .main_wrapper .body_flex .body .body_wrapper .parametr .parrent_switcher_wrapper .parrent_switcher .sbody span, #cars .main_wrapper .body_flex .body .body_wrapper .parametr .parrent_switcher_wrapper .parrent_switcher .sbtn img, #cars .main_wrapper .body_flex .body .main_buttons .create_btn span, #cars .main_wrapper .body_flex .body .main_buttons .random_btn img, #cars .main_wrapper .body_flex .type_wrapper .type_btn img, #cars .bank-error-window, #cars .bank-error-window .bank-error-texts, #auth .login_wrapper, #auth .login_wrapper .form_login .button span, #pedCreator .main_wrapper .body_flex .body .body_wrapper .parametr .switcher_wrapper .switcher .btn img, #pedCreator .main_wrapper .body_flex .body .body_wrapper .parametr .parrent_switcher_wrapper .parrent_switcher .sbody span, #pedCreator .main_wrapper .body_flex .body .body_wrapper .parametr .parrent_switcher_wrapper .parrent_switcher .sbtn img, #pedCreator .main_wrapper .body_flex .body .main_buttons .create_btn span, #pedCreator .main_wrapper .body_flex .body .main_buttons .random_btn img, #pedCreator .main_wrapper .body_flex .type_wrapper .type_btn img, #pedCreator .bank-error-window, #pedCreator .bank-error-window .bank-error-texts, #charSelector .main_wrapper, #charSelector .main_wrapper .type_wrapper .selector_wrapper .up_block .number span, #charSelector .main_wrapper .type_wrapper .selector_wrapper .down_block .button span, #inventory .main_wrapper, #inventory .main_wrapper .list-slots-wrapper .slots .fast-slot .item, #inventory .main_wrapper .player-skin-wrapper .player-skin .player-skin-slots .player-skin-slot .item, #inventory .main_wrapper .player-skin-wrapper .player-skin .player-skin-slots .player-skin-slot img, #inventory .main_wrapper .modal-window-wrapper .modal-window .modal-buttons-wrapper .modal-buttons-btn span, #HUD_main .hints .hint_wrapper .hint p, #HUD_main .use-button .use-button-wrapper .use-button-btn p, #menu .house-prompt-wrapper .house-prompt-button span, #autosalon .autosalon-prompt-wrapper .autosalon-prompt-button span, #autosalon .main-buttons-wrapper .main-buttons-buttons .main-buttons-button span, #autosalon .modal-window-wrapper .modal-window-container, #autosalon .success-window-wrapper .success-text-wrapper, #bank .bank-create-wrapper, #bank .bank-create-wrapper .bank-create-button span, #bank .bank-wrapper .bankomat-wrapper, #bank .bank-wrapper .bankomat-wrapper .bank-card-info .bank-card-info-right .bank-card-info-right-buttton span, #bank .bankomat-modal-wrapper, #bank .bankomat-modal-wrapper .bankomat-modal-buttons .bankomat-modal-button span, #bank .bank-error-window, #bank .bank-error-window .bank-error-texts, #bankomat .bankomat-wrapper, #bankomat .bankomat-modal-wrapper, #bankomat .bankomat-modal-wrapper .bankomat-modal-buttons .bankomat-modal-button span, #farm .farm-type-work-wrapper, #farm .farm-type-work-wrapper .farm-type-work-btns .farm-type-work-btn span, #farm .farm-info-wrapper, #farm .farm-info-wrapper .farm-info-button span, #farm .farm-prompt-wrapper .autosalon-prompt-button span, #bus .bus-work-wrapper .bus-info-wrapper, #bus .bus-work-wrapper .bus-info-wrapper .farm-info-button span, #bus .bus-prompt-wrapper .bus-prompt-button span, #mower .farm-type-work-wrapper, #mower .farm-type-work-wrapper .farm-type-work-btns .farm-type-work-btn span, #mower .farm-info-wrapper, #mower .farm-info-wrapper .farm-info-button span, #mower .farm-prompt-wrapper .autosalon-prompt-button span, #taxi .taxi-first-wnd-wrapper, #taxi .taxi-oders-wrapper, #taxi .taxi-rent-taxi-wrapper, #taxi .taxi-fare-wrapper, #houses .house-wrapper .house-b, #houses .house-wrapper .house-container, #houses .house-prompt-wrapper .house-prompt-button span, #houses .exit-wrapper .house-b, #houses .exit-wrapper .exit-container, #autoschool .autoschool-tabs-wrapper {
   position: absolute;
@@ -1205,8 +1206,8 @@ body {
 #HUD_chat {
   position: absolute; }
   #HUD_chat .chat_wrapper {
-    margin-left: 4.5vh;
-    margin-top: 4.5vh;
+    margin-left: 30px;
+    margin-top: 30px;
     height: 25vh;
     width: 80vh; }
     #HUD_chat .chat_wrapper .messages {
@@ -1220,7 +1221,7 @@ body {
         color: #ffffff;
         text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.25); }
   #HUD_chat .input {
-    margin-left: 2.7vh;
+    margin-left: 30px;
     border: 0;
     outline: 0;
     padding-left: 0.5vh;
@@ -1235,7 +1236,7 @@ body {
     color: rgba(255, 255, 255, 0.71); }
   #HUD_chat .buttons {
     display: flex;
-    margin-left: 2.7vh;
+    margin-left: 30px;
     margin-top: 0.5vh; }
     #HUD_chat .buttons span {
       margin-left: 3vh;

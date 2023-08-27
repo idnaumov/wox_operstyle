@@ -19,10 +19,7 @@ var Chat = new Vue({
     data: {
         active: true,
         message: '',
-        messages: [
-            "fghfghfghfghfgh",
-            "Я хуй",
-        ],
+        messages: [],
         historyMessages: [],
         historyCount: 0,
         open: false,

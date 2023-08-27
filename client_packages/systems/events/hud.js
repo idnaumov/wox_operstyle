@@ -73,21 +73,24 @@ mp.events.add('render', () => {
     let zone_hash = mp.game.pathfind.getStreetNameAtCoord(player.position.x, player.position.y, player.position.z, 0, 0)
     let zone = mp.game.ui.getStreetNameFromHashKey(zone_hash.streetName);
 
-    browser.call('HUD_updateLocation::CEF', getMinimapTopRight().y + 125, getMinimapTopRight().x + 15, location, zone)
+    browser.call('HUD_updateLocation::CEF', getMinimapTopRight().y + 100, getMinimapTopRight().x + 15, location, zone)
 
     let vehicle = player.vehicle;
     if (player.vehicle && player.vehicle.getPedInSeat(-1) === player.handle) {
         if (hidden == false) {
-            browser.execute(`Speedometer.active = true`)
+            browser.execute(`HUD.activeSpeedometer = true`)
         }
         let vel = vehicle.getSpeed();
         let speed = Math.round(parseInt(vel) * 3.6);
-
-        browser.execute(`Speedometer.speed = ${speed}`)
+        
+        browser.execute(`HUD.speedElements.speed = ${speed}`)
     }
     else {
-        browser.execute(`Speedometer.active = false`)
+        browser.execute(`HUD.activeSpeedometer = false`)
     }
+
+    let engineEnabled = vehicle.getIsEngineRunning();
+    browser.execute(`HUD.carElements.engine = ${engineEnabled}`)
 
     //     
     let online = mp.players.length;
@@ -109,7 +112,7 @@ mp.keys.bind(0x54, true, function () {
 // F7
 mp.keys.bind(0x76, true, function () {
     if (player.getVariable('logged') == false) return;
-    if(inTestdrive) return;
+    if (inTestdrive) return;
     if (hidden == true) return mp.events.call('HUD_setShow::CLIENT', !false)
     mp.events.call('HUD_setShow::CLIENT', !true)
 })

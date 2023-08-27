@@ -28,7 +28,7 @@ mp.events.addCommand('veh', (player, _, id, veh, color1, color2) => {
     let pos;
     pos = target.position;
     var AdminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z), {
-        numberPlate: "X777AM77",
+        numberPlate: "B004KO99",
     });
     AdminVeh.setColor(parseInt(color1), parseInt(color2));
     player.setVariable('AdminVeh' + player.id, AdminVeh);
