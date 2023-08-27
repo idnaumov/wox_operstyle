@@ -5,7 +5,6 @@ var previewVehicle;
 var type = 0;
 const localPlayer = mp.players.local;
 var inTestdrive = false;
-
 let carBlip;
 
 let carColshape;

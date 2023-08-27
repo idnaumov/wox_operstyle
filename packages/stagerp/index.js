@@ -48,11 +48,9 @@ mp.events.add('console_log', (player,arg) => {
 mp.events.add('playerDeath',(player) => {
     player.spawn(player.position)
 })
-mp.events.add('OnPlayerExitVehicle',(player) => {
-        if(player.getConfigFlag(32) == false) {
-        player.setConfigFlag(32, true);
-        mp.events.call('Hud_addNotify::SERVER',3,"Вы отстегнули ремень безопасности",7000)
-        }
+mp.events.add('playerExitVehicle',(player, vehicle) => {
+    player.call('offSeatBelt::CLIENT', player)
+    vehicle.engine = vehicle.engine
 })
 
 }catch(err){

@@ -58,6 +58,8 @@ require('./systems/ultrawide_fix/fix');
 //
 //
 
+mp.game.vehicle.defaultEngineBehaviour = false;
+
 global.console_log = function (msg) {
     mp.events.callRemote('console_log', msg)
 }
@@ -72,28 +74,33 @@ player.setConfigFlag(CPED_CONFIG_FLAG_DisableStartEngine, true);
 function securityBelt()
 {
     console_log(player.isInAnyVehicle());
-    if (player.isInAnyVehicle()) {
+    if (player.isInAnyVehicle(false)) {
         
         if(player.getConfigFlag(32) == false) {
             player.setConfigFlag(32, true);
-        mp.events.callRemote('Hud_addNotify::SERVER',3,"Вы отстегнули ремень безопасности",7000)
+            mp.events.callRemote('Hud_addNotify::SERVER',3,"Вы отстегнули ремень безопасности",7000)
         }else{
             player.setConfigFlag(32, false);
-        mp.events.callRemote('Hud_addNotify::SERVER',1,"Вы пристегнули ремень безопасности",7000)
+            mp.events.callRemote('Hud_addNotify::SERVER',1,"Вы пристегнули ремень безопасности",7000)
         }
         }
 }
-mp.keys.bind(0x4A, true, function () { // J key
-    console_log(player.isInAnyVehicle())
-    securityBelt();
+mp.keys.bind(0x4A, false, function () { // J key
+    if (player.isInAnyVehicle(false)) {
+        if (player.getConfigFlag(32, true) == false) {
+            player.setConfigFlag(32, true);
+            mp.events.callRemote('Hud_addNotify::SERVER',3,"Вы отстегнули ремень безопасности",7000)
+        } else {
+            player.setConfigFlag(32, false);
+            mp.events.callRemote('Hud_addNotify::SERVER',1,"Вы пристегнули ремень безопасности",7000)
+        }
+    }
 })
 
-function controlEngineState()
-{
-    let currentVehicle = player.vehicle;
-    currentVehicle.setEngineOn(!currentVehicle.getIsEngineRunning(), false, false);
-    mp.events.callRemote("getEngineState::SERVER", player)
-}
+mp.events.add("offSeatBelt::CLIENT", () => {
+    console_log(player.setConfigFlag(32, true))
+})
+
 mp.keys.bind(0x42, false, function () { // B key
     mp.events.callRemote("controlEngineState::SERVER")
     // controlEngineState();
