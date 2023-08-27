@@ -102,12 +102,36 @@ mp.world.requestIpl("vw_casino_penthouse");
 
 
 let chat = require("./events/hud");
-mp.events.add('getEngineState::SERVER', (player) => {
+mp.events.add('controlEngineState::SERVER', (player) => {
     let veh = player.vehicle
-    if ( veh.engine ) {
-        chat.addNotify(player, 3, "Двигатель запущен", 4000)
-    } else {
-        chat.addNotify(player, 3, "Двигатель заглушен", 4000)
+    let carsArray = player.personalVehicles;
+    let nowCar;
+    let carOwner
+    nowCar = carsArray.find(item => item.id === player.vehicle.getVariable('id'));
+   
+    if ( veh && player.seat == 0 ) {
+        if (nowCar || player.getVariable('adminlvl') > 1) {
+            if (nowCar != undefined ) {
+                if ( player.vehicle.getVariable('id') != nowCar.id ) {
+                    carOwner = false
+                } else {
+                    carOwner = true
+                }
+            }
+            if ( carOwner || player.getVariable('adminlvl') > 1 ) {
+                if ( veh.engine == false ) {
+                    veh.engine = true
+                    chat.addNotify(player, 3, "Двигатель запущен", 4000)
+                } else {
+                    veh.engine = false
+                    chat.addNotify(player, 3, "Двигатель заглушен", 4000)
+                }
+            } else {
+                chat.addNotify(player, 2, "У вас нет ключей от этого авто", 4000)
+            }
+        } else {
+            chat.addNotify(player, 2, "У вас нет ключей от этого авто", 4000)
+        }
     }
 })
 
