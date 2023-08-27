@@ -97,6 +97,7 @@ mp.events.add('render', () => {
 
         browser.execute(`HUD.speedElements.gear = '${gear}'`)
         browser.execute(`HUD.carElements.engine = ${vehicle.getIsEngineRunning()}`)
+        browser.execute(`HUD.carElements.seatbelt = ${player.getConfigFlag(32, true)}`)
     }
     else {
         browser.execute(`HUD.activeSpeedometer = false`)
