@@ -95,7 +95,8 @@ function controlEngineState()
     mp.events.callRemote("getEngineState::SERVER", player)
 }
 mp.keys.bind(0x42, false, function () { // B key
-    controlEngineState();
+    mp.events.callRemote("controlEngineState::SERVER")
+    // controlEngineState();
 })
 
 let showHud = true

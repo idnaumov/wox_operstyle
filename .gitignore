@@ -12,3 +12,4 @@ ragemp-server
 ragemp-server.exe
 /client_packages/game_resources
 client_packages/browser/systems/Hud/img/eat.svg
+client_packages/.listcache
