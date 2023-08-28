@@ -40,7 +40,7 @@ mp.events.add("loadCharacter::SERVER", (player) => {
           }
         );
 
-        chat.send(player, `!{#FFFFFF}${translations.chat_welcome}!{#FFFFFF} ${translations.chat_stage}!{#9AD450} 0.0.17dev`);
+        chat.send(player, `!{#FFFFFF}${translations.chat_welcome}!{#FFFFFF} ${translations.chat_stage}!{#9AD450} 0.0.18dev`);
         chat.addNotify(player, 1, `${translations.chat_player} ${player.name}`, 7000);
         if (player.getVariable("adminlvl") >= 1) {
           chat.send(
@@ -133,8 +133,6 @@ async function loadFace(player, data) {
   if(items[i].componentId == 6) {
     shoes = items[i].textureId
   }
-  //console.log(items[i]);
-  console.log(items[i].name + ' ' + items[i].textureId)
 }
   }
 
