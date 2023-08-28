@@ -129,7 +129,7 @@ mp.keys.bind(0x76, true, function () {
     mp.events.call('HUD_setShow::CLIENT', !true)
 })
 
-mp.keys.bind(0x71, true, function () {
+mp.keys.bind(0xC0, true, function () { // ~
     if (mp.gui.cursor.visible == false) return mp.gui.cursor.show(true, true);
     mp.gui.cursor.show(false, false);
 })

@@ -46,6 +46,8 @@ require('./systems/autosalon/auto');
 //utils
 require('./systems/utils/death');
 require('./systems/utils/zones');
+require('./systems/utils/ultrawide');
+require('./systems/utils/bigmap');
 
 global.browser = mp.browsers.new('package://browser/index.html');
 global.player = mp.players.local;

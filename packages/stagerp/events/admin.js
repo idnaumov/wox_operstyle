@@ -42,6 +42,7 @@ mp.events.addCommand('veh', (player, _, id, veh, color1, color2) => {
     AdminVeh.setColor(parseInt(color1), parseInt(color2));
     player.setVariable('AdminVeh' + player.id, AdminVeh);
     target.putIntoVehicle(AdminVeh, 0)
+    AdminVeh.setVariable('fuel', 50)
 })
 
 mp.events.addCommand('aveh', (player, _, id, veh, color1, color2) => {

@@ -4,6 +4,7 @@ let chat = require('./basic/hud');
 mp.events.addCommand('me',(player,args) => {
     if(args == undefined) return chat.send(player,'!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /me [Действие]')
     chat.sendLocal(player,`!{#C2A2DA} ${player.name}[${player.getVariable('id')}]: ${args}`,15)
+    console.log(Vehicles[1].name)
 })
 
 mp.events.addCommand('do',(player,args) => {

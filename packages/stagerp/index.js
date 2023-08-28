@@ -2,13 +2,14 @@ try{
 
 // Модули, утилиты, методы
 
-require('./modules/mysql'); // База данных
+let mysql = require('./modules/mysql'); // База данных
 require('./modules/methods'); // Методы
 require('./utilities/time'); // Система времени
 require('./utilities/weather'); // Система погоды
 require('./utilities/items'); // Предметы
 require('./utilities/death'); // Система смерти
 require('./utilities/zones'); // Зеленые зоны
+require('./utilities/enums'); // Зеленые зоны
 
 // Основное
 
@@ -33,6 +34,7 @@ require('./events/commands'); // Команды
 require('./events/inventory'); // Инвентарь
 require('./events/houses'); // Дома
 require('./events/menu'); // Меню
+let vehicleInfo = require('./events/vehicles'); // Меню
 
 // Работы
 
@@ -45,15 +47,33 @@ require('./jobs/taxi');
 
 require('./fractions/index'); // Основное
 
-        // Гос
+// Гос
         
-        require('./fractions/gov/autoschool');
+require('./fractions/gov/autoschool');
 
-        // Крайм
+// Крайм
 
-        require('./fractions/ghetto/ghetto_zones');
-        require('./fractions/ghetto/aztecas');
+require('./fractions/ghetto/ghetto_zones');
+require('./fractions/ghetto/aztecas');
 
+function init() {
+    try {
+        if(!mysql.isConnected)
+        {
+            console.log('[MySQL] Database is not connected. Retrying start gamemode in 10 sec..');
+            setTimeout(init, 10000);
+        } 
+        else 
+        {
+            console.log('INIT GAMEMODE');
+            vehicleInfo.loadAll();
+        }
+    } 
+    catch (e) {
+        console.log('ERROR INIT ' + e);
+    }
+}
+init()
 
 
 mp.events.add('console_log', (player,arg) => {
