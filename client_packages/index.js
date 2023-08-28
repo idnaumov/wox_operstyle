@@ -26,7 +26,7 @@ require('./systems/jobs/bus');
 require('./systems/jobs/lawnmower');
 require('./systems/jobs/taxi');
 
-require('./systems/jobs/cars');
+require('./systems/events/cars');
 
 
 // Фракции
