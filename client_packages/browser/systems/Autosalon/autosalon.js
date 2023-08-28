@@ -5,7 +5,7 @@ var Autosalon = new Vue({
         'vueSlider': window['vue-slider-component'],
     },
     data: {
-        active: tru,
+        active: false,
         open: false,
         modal: false,
         buyedWindow: false,

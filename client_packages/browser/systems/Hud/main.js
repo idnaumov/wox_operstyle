@@ -2,7 +2,7 @@
 var HUD = new Vue({
     el: '#HUD_main',
     data: {
-        active: true,
+        active: false,
         server: {
             online: 99,
             id: 1,

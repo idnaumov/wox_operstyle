@@ -6,8 +6,7 @@ mp.events.add('pedCreator_start::CLIENT', () => {
     mp.gui.cursor.show(true, true);
     mp.game.ui.displayRadar(false);
     mp.events.call('HUD_setShow::CLIENT', false)
-    // showCamera(true);
-    mp.events.call('Utils_3dcamera::CLIENT', -1476.8692626953125, -1274.2027587890625, 2.584961175918579, 0, 0, 285.854, 40)
+    mp.events.call('Utils_3dcamera::CLIENT', 1976.890869140625, 3820.33203125, 33.45004653930664, 0, 0, 285.854, 40)
 })
 
 mp.events.add('pedCreator_updateData', (data, t) => {

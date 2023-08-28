@@ -1,6 +1,4 @@
-
 let await = false;
-
 
 mp.events.add('Auth_await::CLIENT', () => {
     let intr = setInterval(() => {
@@ -17,11 +15,11 @@ mp.events.add('Auth_showLoginDialog::CLIENT', () => {
     showCamera(true);
     mp.events.call('HUD_setShow::CLIENT', false)
     //
-    var storage = mp.storage.data;
-    var saveData = storage.auth;
+    let storage = mp.storage.data;
+    let saveData = storage.auth;
     if (saveData) {
-        var login = saveData.login;
-        var pass = saveData.pass;
+        let login = saveData.login;
+        let pass = saveData.pass;
         browser.execute(`
             Auth.Login.login = '${login}';
             Auth.Login.password = '${pass}';
@@ -31,13 +29,13 @@ mp.events.add('Auth_showLoginDialog::CLIENT', () => {
     browser.execute(`Auth.active = true;`)
 });
 
-var camera;
+let camera;
 
 function showCamera(type) {
     if (type) {
-        camera = mp.cameras.new('default', new mp.Vector3(-1531.363525390, -1117.91162109, 21.6518955230), new mp.Vector3(0, 0, 0), 40);
+        camera = mp.cameras.new('default', new mp.Vector3(-426.575439453125, -213.47694396972656, 125.90231323242188), new mp.Vector3(0, 0, 0), 40);
 
-        camera.pointAtCoord(-1645.70922851, -1129.0003662109, 22.76616477); // Changes the rotation of the camera to point towards a location
+        camera.pointAtCoord(-528.703857421875, -177.3805389404297, 54.787967681884766); // Changes the rotation of the camera to point towards a location
         camera.setActive(true);
         mp.game.cam.renderScriptCams(true, false, 0, true, false);
     }

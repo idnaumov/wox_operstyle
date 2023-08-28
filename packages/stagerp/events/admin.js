@@ -1,6 +1,11 @@
 
-let chat = require('./hud');
+let chat = require('./basic/hud');
 let methods = require('../modules/methods');
+
+// Language
+let config = require('../../../languages/config.js');
+const language = config.language;
+let translations = require(`../../../languages/${language}.json`);
 
 function pointingAt(distance) {
     const camera = mp.cameras.new("gameplay"); // gets the current gameplay camera
@@ -17,35 +22,38 @@ function pointingAt(distance) {
 }
 
 mp.events.addCommand('veh', (player, _, id, veh, color1, color2) => {
+    
     if(player.getVariable('adminlvl') < 1) return;
-    if (id == undefined || veh == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /veh [id] [Vehicle] [Color1] [Color2]');
+
+    if (id == undefined || veh == undefined) return chat.send(player, `!{#BAFE2A}${translations.chat_info}!{#FFFFFF} ${translations.chat_use} /veh [id] [Vehicle] [Color1] [Color2]`);
     let target = methods.getById(id);
     if (target == undefined) return chat.addNotify(player, 2, 'Игрок не найден', 7000)
+
     var cVeh = player.getVariable('AdminVeh' + player.id)
     if (cVeh != null) {
         cVeh.destroy();
     }
+
     let pos;
     pos = target.position;
     var AdminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z), {
-        numberPlate: "B004KO99",
+        numberPlate: "x777am77"
     });
     AdminVeh.setColor(parseInt(color1), parseInt(color2));
     player.setVariable('AdminVeh' + player.id, AdminVeh);
-    player.putIntoVehicle(AdminVeh, 0)
+    target.putIntoVehicle(AdminVeh, 0)
 })
 
-mp.events.addCommand('setvehcomp', (player, _, id, compid) => {
-    if(player.getVariable('adminlvl') < 9) return;
-    if (id == undefined || compid == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /setvehcomp [id] [ComponentID]');
-    let vehicle = player.vehicle;
-    vehicle.setMod(parseInt(id), parseInt(compid));
-})
-
-mp.events.addCommand('setweather', (player, _, weatherID) => {
-    if(player.getVariable('adminlvl') < 9) return;
-    if (weatherID == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /setweather [id]');
-    mp.world.setWeatherTransition(parseInt(weatherID));
+mp.events.addCommand('aveh', (player, _, id, veh, color1, color2) => {
+    if(player.getVariable('adminlvl') < 5) return;
+    if (id == undefined || veh == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /aveh [id] [Vehicle] [Color1] [Color2]');
+    let target = methods.getById(id);
+    if (target == undefined) return chat.addNotify(player, 2, 'Игрок не найден', 7000)
+    let pos;
+    pos = target.position;
+    var AdminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z));
+    AdminVeh.setColor(parseInt(color1), parseInt(color2));
+    target.putIntoVehicle(AdminVeh, 0)
 })
 
 mp.events.addCommand('setspeed', (player) => {
@@ -101,7 +109,8 @@ mp.events.addCommand('tp', (player, id) => {
 
 mp.events.addCommand('ipl', (player, id) => {
     if(player.getVariable('adminlvl') < 5) return;
-    if (id == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /ipl [id]');   
+    if (id == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /ipl [id]');
+    chat.addNotify(player, 1, `Вы успешно загрузили интерьер ${id}`, 4000);   
     mp.world.requestIpl(id);
 })
 
@@ -133,11 +142,10 @@ mp.events.addCommand('removemoney', (player, _, id, amount) => {
     chat.send(target, `!{#BAFE2A}[Информация] !{#FFFFFF}Администратор ${player.name} забрал $${amount}!`)
 })
 
-// Глобальный чат (/o текст)
 mp.events.addCommand('o', (player, args) => {
     if(player.getVariable('adminlvl') < 1) return;
     if (args == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /o [Текст]')
-    chat.sendAll(`!{#8B0000}Администратор ${player.name}: ${args}`)
+    chat.sendAll(`!{#FF0000}Администратор ${player.name}: ${args}`)
 })
 
 
@@ -167,43 +175,89 @@ mp.events.addCommand('setseat', (player, seat) => {
     player.call('xdddd',[player.vehicle,seat])
 })
 
-// Админ чат (/a текст)
 mp.events.addCommand('a',(player,text) => {
     mp.players.forEach(_player => {
         if(_player.getVariable('adminlvl') > 1) {
-            chat.send(_player,`Администратор ${player.name}: ${text}`)
+            chat.send(_player,`!{#FF0000}[A] !{#FFFFFF}${player.name} сказал: ${text}`)
         }
     })
 })
 
-
-var gm = false;
-// Режим бессмертия (/gm)
-mp.events.addCommand( 'gm', (player) => {
-    if(player.getVariable('adminlvl') < 1) return;
-    gm = !gm
-    if (gm) {
-        player.setInvincible(true);
-        chat.addNotify(player, 2, 'Вы включили GodMode', 7000)
-    } else {
-        player.setInvincible(false);
-        chat.addNotify(player, 2, 'Вы выключили GodMode', 7000)
+mp.events.addCommand('dimension', (player, world) => {
+    if (player.getVariable('adminlvl') < 1) return;
+    
+    if (!world) {
+      let playerDimension = player.dimension;
+      chat.send(player, `!{#BAFE2A}[Информация] !{#FFFFFF}Ваше текущее измерение: ${playerDimension}`)
+      return;
     }
-})
-
-// Телепорт в другое измерение (/dimension id человека, id измерения)
-mp.events.addCommand( 'dimension', (player, _, id, dimid) => {
-    if(player.getVariable('adminlvl') < 1) return;
-    if (id == null || dimid == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /dimension [id] [dimension id]');
+    
+    let dimension = parseInt(world);
+    
+    if (isNaN(dimension)) {
+      chat.addNotify(player, 2, 'Укажите правильное числовое значение для измерения', 4000);
+      return;
+    }
+    
+    player.dimension = dimension;
+    chat.addNotify(player, 1, `Вы успешно изменили значение измерения на ${dimension}`, 4000);
+  });
+  
+  mp.events.addCommand('freeze', (player, _, id) => {
+    if (player.getVariable('adminlvl') < 1) return;
+    if (id == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /freeze [id]');
     let target = methods.getById(id);
     if (target == undefined) return chat.addNotify(player, 2, 'Игрок не найден', 7000)
-    target.dimension = dimid;
+    chat.addNotify(target, 3, `Вы были заморожены`, 4000);
+    chat.addNotify(player, 1, `Вы успешно заморозили игрока`, 4000);
+    target.call('freezePlayer');
+});
+
+mp.events.addCommand('unfreeze', (player, _, id) => {
+    if (player.getVariable('adminlvl') < 1) return;
+    if (id == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /unfreeze [id]');
+    let target = methods.getById(id);
+    if (target == undefined) return chat.addNotify(player, 2, 'Игрок не найден', 7000)
+    chat.addNotify(target, 3, `Вы были разморожены`, 4000);
+    chat.addNotify(player, 1, `Вы успешно разморозили игрока`, 4000);
+    target.call('unfreezePlayer');
+});
+
+mp.events.addCommand('kick', (player, _, id) => {
+    if (player.adminlvl < 1) return;
+    if (!id) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /kick [id]');
+    let target = methods.getById(id);
+    chat.addNotify(target, 3, `Игрок не найден`, 4000);
+});
+
+mp.events.addCommand('alvl', (player) => {
+    if (player.getVariable('adminlvl') < 1) return;
+    let alvl = player.getVariable('adminlvl');
+    chat.addNotify(player, 1, `Ваш уровень админа: ${alvl}`, 4000);
 })
 
-// Дебаг авто (/dl)
-mp.events.addCommand('dl', (player) => {
-    if(player.getVariable('adminlvl') < 1) return;
-    player.setVariable("render_info_cars", !player.getVariable('render_info_cars'));
+mp.events.addCommand('zzcheck', (player) => {
+    if (player.getVariable('adminlvl') < 1) return;
+    let zz = player.getVariable('playerInGreenZone');
+    chat.addNotify(player, 1, `Ваш уровень админа: ${zz}`, 4000);
+})
+
+mp.events.addCommand('button', (player) => {
+    chat.addNotify(player, 1, `Должна кнопка появится`, 4000);
+    player.call('testButtonE');
+})
+
+mp.events.addCommand('settempskin', (player, _, hash) => {
+    if(player.getVariable('adminlvl') < 3) return;
+    if (hash == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /settempskin [skin hash]')
+    chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}a_c_chimp')
+    player.model = mp.joaat(hash)
+});
+
+mp.events.addCommand('setweather', (player, _, weatherID) => {
+    if(player.getVariable('adminlvl') < 9) return;
+    if (weatherID == undefined) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /setweather [id]');
+    mp.world.setWeatherTransition(parseInt(weatherID));
 });
 
 mp.events.addCommand('settempskin', (player, _, hash) => {

@@ -1,17 +1,29 @@
 
 let open = false;
 
+let open2 = false;
+
+mp.keys.bind(0x31, true, function () {
+    if (chatOpened == true) return;
+    browser.execute(`Inventory.useItem(true,1);`)
+});
+
+mp.keys.bind(0x32, true, function () {
+    if (chatOpened == true) return;
+    browser.execute(`Inventory.useItem(true,2);`)
+});
+
+mp.keys.bind(0x33, true, function () {
+    if (chatOpened == true) return;
+    browser.execute(`Inventory.useItem(true,3);`)
+});
+
 mp.keys.bind(0x49, true, function () {
     if (chatOpened == true) return;
-    mp.events.callRemote('Inventory_loadPlayerItems::SERVER') 
-    
+    mp.events.callRemote('Inventory_loadPlayerItems::SERVER')
 });
 
-mp.events.addCommand('testinv', (player) => {
-    Inventory_addItem('[RL] Маска Егор Шип', 'Маска для скрытия лица', "clothes", "./systems/inventory/img/skin-items/mask.svg", 1, 2, true, true, 0, 0);
-});
-
-mp.events.add('Inventory_openWindow::CLIENT', (items) => {
+mp.events.add('Inventory_openWindow::CLIENT', async (items) => {
         if(open){
         browser.call('Inventory_open::CEF',false,items)
         open = false;
@@ -29,26 +41,27 @@ mp.events.add('Inventory_openWindow::CLIENT', (items) => {
         }
 })
 
-mp.events.add('Inventory_useItem::CLIENT', (item) => {
+mp.events.add('Inventory_openWindow2::CLIENT', async () => {
 
-    mp.events.callRemote('Inventory_useItem::SERVER',item)
+    await mp.events.callRemote('Inventory_loadPlayerItems::SERVER')
 
 })
 
-function Inventory_addItem(name, desc, type, img, arg1, arg2, arg3, arg4, arg5, arg6) {
-    console.log(123)
-    mp.events.callRemote('Inventory_addItem::SERVER', name, desc, type, img, arg1, arg2, arg3, arg4, arg5, arg6)
-}
-mp.events.add('Inventory_addItem::CLIENT',Inventory_addItem);
+mp.events.add('Inventory_useItem::CLIENT', (item) => {
+
+    mp.events.callRemote('Inventory_useItem::SERVER',item);
+
+})
 
 mp.events.add('Inventory_syncItems::CLIENT', (items) => {
     mp.events.callRemote('Inventory_syncItems::SERVER',items)
 })
 
-// mp.events.add('Inventory_addItem::CLIENT', (name, desc, type, img, arg1, arg2, arg3, arg4, arg5, arg6) => {
-//     console.log(123)
-//     mp.events.callRemote('Inventory_addItem::SERVER', name, desc, type, img, arg1, arg2, arg3, arg4, arg5, arg6)
-// })
+mp.events.add('Inventory_clearSlots::CLIENT', (none) => {
+
+browser.call('Inventory_clearSlots::CEF');
+
+})
 
 mp.events.add('Inventory_equipClothes::CLIENT', (data) => {
     mp.events.callRemote('Inventory_equipClothes::SERVER',data);

@@ -1,13 +1,4 @@
-browser = mp.browsers.new('package://browser/index.html')
-
-player = mp.players.local;
-
-require('./mp-commands/index');
-
-require('./systems/shortcut');
-require('./systems/npc');
-require('./systems/misc');
-
+require('./systems/events/admin');
 require('./systems/events/auth');
 require('./systems/events/pedCreator');
 require('./systems/events/charselector');
@@ -22,17 +13,27 @@ require('./systems/events/voice');
 require('./systems/events/weaponcompsync');
 require('./systems/events/houses');
 require('./systems/events/menu');
-require('./systems/events/cars');
+require('./systems/events/rent');
 // 
 require('./systems/utils/3dCamera');
 require('./systems/utils/snake');
 require('./systems/utils/noclip');
+require('./systems/utils/other');
 // Jobs
 
 require('./systems/jobs/farm');
 require('./systems/jobs/bus');
 require('./systems/jobs/lawnmower');
 require('./systems/jobs/taxi');
+
+require('./systems/jobs/cars');
+
+
+// Фракции
+
+require('./systems/fractions/autoschool');
+require('./systems/fractions/ghetto/ghetto_zones');
+
 
 //
 require('./luckywheel/index');
@@ -42,23 +43,16 @@ require('./luckywheel/index');
 require('./systems/autosalon/auto');
 //
 
-// clothes shop
-require('./systems/shops/clothes');
-//
-require('./systems/shops/barber');
+//utils
+require('./systems/utils/death');
+require('./systems/utils/zones');
 
-require('./fly.js');
-
-// tuning
-//require('./systems/tuning/lsc');
-//
-require('./systems/ultrawide_fix/fix');
+global.browser = mp.browsers.new('package://browser/index.html');
+global.player = mp.players.local;
 
 //IPL
 //
 //
-
-mp.game.vehicle.defaultEngineBehaviour = false;
 
 global.console_log = function (msg) {
     mp.events.callRemote('console_log', msg)
@@ -68,23 +62,112 @@ global.chatsend = function(msg) {
     mp.events.callRemote('Hud_chatSendMessage::SERVER',msg)
 }
 
-CPED_CONFIG_FLAG_DisableStartEngine = 429;
+var VK = {
+    TAB: 0x09,
+    ENTER: 0x0d,
+    LSHIFT: 0xA0,
+    RSHIFT: 0xA1,
+    LCTRL: 0xA2,
+    RCTRL: 0xA3,
+    ALT: 0x12,
+    PAUSE: 0x13,
+    CAPS: 0x14,
+    ESC: 0x1b,
+    SPACE: 0x20,
+    PGUP: 0x21,
+    PGDOWN: 0x22,
+    END: 0x23,
+    HOME: 0x24,
+    LARROW: 0x25,
+    UARROW: 0x26,
+    RARROW: 0x27,
+    DARROW: 0x28,
+    INS: 0x2d,
+    DEL: 0x2e,
+    ZERO: 0x30,
+    ONE: 0x31,
+    TWO: 0x32,
+    THREE: 0x33,
+    FOUR: 0x34,
+    FIVE: 0x35,
+    SIX: 0x36,
+    SEVEN: 0x37,
+    EIGHT: 0x38,
+    NINE: 0x39,
+    A: 0x41,
+    B: 0x42,
+    C: 0x43,
+    D: 0x44,
+    E: 0x45,
+    F: 0x46,
+    G: 0x47,
+    H: 0x48,
+    I: 0x49,
+    J: 0x4a,
+    K: 0x4b,
+    L: 0x4c,
+    M: 0x4d,
+    N: 0x4e,
+    O: 0x4f,
+    P: 0x50,
+    Q: 0x51,
+    R: 0x52,
+    S: 0x53,
+    T: 0x54,
+    U: 0x55,
+    V: 0x56,
+    W: 0x57,
+    X: 0x58,
+    Y: 0x59,
+    Z: 0x5a,
+    NUM0: 0x60,
+    NUM1: 0x61,
+    NUM2: 0x62,
+    NUM3: 0x63,
+    NUM4: 0x64,
+    NUM5: 0x65,
+    NUM6: 0x66,
+    NUM7: 0x67,
+    NUM8: 0x68,
+    NUM9: 0x69,
+    F1: 0x70,
+    F2: 0x71,
+    F3: 0x72,
+    F4: 0x73,
+    F5: 0x74,
+    F6: 0x75,
+    F7: 0x76,
+    F8: 0x77,
+    F9: 0x78,
+    F10: 0x79,
+    F11: 0x7a,
+    F12: 0x7b,
+};
+
+mp.game.streaming.removeIpl("ch1_02_open");
+
+mp.game.streaming.removeIpl("rc12b_fixed");
+mp.game.streaming.removeIpl("rc12b_destroyed");
+mp.game.streaming.removeIpl("rc12b_default");
+mp.game.streaming.removeIpl("rc12b_hospitalinterior_lod");
+mp.game.streaming.removeIpl("rc12b_hospitalinterior");
+
+mp.game.streaming.requestIpl("TrevorsTrailerTidy");
+
+
+let CPED_CONFIG_FLAG_DisableStartEngine = 429;
 player.setConfigFlag(CPED_CONFIG_FLAG_DisableStartEngine, true);
 
-function securityBelt()
-{
-    console_log(player.isInAnyVehicle());
-    if (player.isInAnyVehicle(false)) {
-        
-        if(player.getConfigFlag(32) == false) {
-            player.setConfigFlag(32, true);
-            mp.events.callRemote('Hud_addNotify::SERVER',3,"Вы отстегнули ремень безопасности",7000)
-        }else{
-            player.setConfigFlag(32, false);
-            mp.events.callRemote('Hud_addNotify::SERVER',1,"Вы пристегнули ремень безопасности",7000)
-        }
-        }
-}
+let showHud = true
+mp.keys.bind(0x75, false, function () { // F6 key
+    if (showHud == true ) {
+        mp.events.call("HUD_setShow::CLIENT", false);
+    } else {
+        mp.events.call("HUD_setShow::CLIENT", true);
+    }
+    showHud = !showHud
+})
+
 mp.keys.bind(0x4A, false, function () { // J key
     if (player.isInAnyVehicle(false)) {
         if (player.getConfigFlag(32, true) == false) {
@@ -98,22 +181,11 @@ mp.keys.bind(0x4A, false, function () { // J key
 })
 
 mp.events.add("offSeatBelt::CLIENT", () => {
-    console_log(player.setConfigFlag(32, true))
+    player.setConfigFlag(32, true)
 })
 
 mp.keys.bind(0x42, false, function () { // B key
     mp.events.callRemote("controlEngineState::SERVER")
-    // controlEngineState();
-})
-
-let showHud = true
-mp.keys.bind(0x75, false, function () { // F6 key
-    if (showHud == true ) {
-        mp.events.call("HUD_setShow::CLIENT", false);
-    } else {
-        mp.events.call("HUD_setShow::CLIENT", true);
-    }
-    showHud = !showHud
 })
 
 
@@ -125,8 +197,8 @@ mp.events.add("cef:error", (errorMessage, url, line) => {
     mp.console.logError(`Ошибка: ${errorMessage} в ${url} на строчке ${line.toString()}`);
 });
 
-const colour = { r: 44, g: 128, b: 239 }; // set this to the colour you want
-const serverName = 'OPER STYLE | First Server'; // set this to the pause menu title you want
+const colour = { r: 228, g: 30, b: 107 }; // set this to the colour you want
+const serverName = 'WOX | OPERSTYLE'; // set this to the pause menu title you want
 
 mp.events.add('playerReady', () => {
     mp.game.invoke('0xF314CF4F0211894E', 143, colour.r, colour.g, colour.b, 255); // Replace Michael colour
@@ -147,7 +219,7 @@ function setSpeed() {
         vehicle.setForwardSpeed(speed + 20);
     }else{
     return;
-    }   
+    }
 }else{
     return
 }
@@ -196,3 +268,25 @@ mp.keys.bind(0x58, false, function () { // X key
         return a ? 15 > mp.game.system.vdist(player.position.x, player.position.y, player.position.z, autopilotPoint.x, autopilotPoint.y, autopilotPoint.z) ? (player.clearTasks(), a && player.taskVehicleTempAction(a.handle, 27, 1e4), autopilotPoint = null, autopilotStart = !1, clearInterval(autopilotInterval), void mp.events.callRemote('Hud_addNotify::SERVER',1,"Вы достигли места назначения",7000)) : void 0 : (a && (player.clearTasks(), player.taskVehicleTempAction(a.handle, 27, 1e4)), autopilotStart = !1, void clearInterval(autopilotInterval))
     }, 300)))
 });
+
+let simonIntID = mp.game.interior.getInteriorAtCoords(
+    -58.161064,
+    -1099.174,
+    25.10041
+  );
+  let simonPropList = [
+    "csr_beforeMission", // До разбития витрины
+    // 'csr_afterMissionA',  // Мусор от разбитого стелка
+    // 'csr_afterMissionB', // Тут просто фанерой закрыто
+    "csr_inMission",
+    // 'shutter_open',
+    "shutter_closed",
+  ];
+  
+  for (const propSimons of simonPropList) {
+    mp.game.interior.enableInteriorProp(simonIntID, propSimons);
+    mp.game.invoke("0xC1F1920BAF281317", simonIntID, propSimons, 1); // _SET_INTERIOR_PROP_COLOR
+  }
+  
+  mp.game.interior.refreshInterior(simonIntID);
+

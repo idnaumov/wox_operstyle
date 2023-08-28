@@ -1,13 +1,11 @@
 
 function getById(id) {
     var rplayer;
-    mp.players.forEach(
-        (player) => {
-            if (player.getVariable('id') == id) {
-                rplayer = player;
-            }
+    mp.players.forEach(function (player) {
+        if (player.getVariable('id') == id) {
+            rplayer = player;
         }
-    );
+    })
     return rplayer;
 }
 

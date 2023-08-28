@@ -1,5 +1,4 @@
 
-
 mp.keys.bind(0x5A, true, function () {   // z Key
     if (player.vehicle) return;
     if(chatOpened == true) return;

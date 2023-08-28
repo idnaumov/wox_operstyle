@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 #HUD_main .right_up {
   position: absolute;
   right: 30px;
@@ -234,6 +238,8 @@
 }
 
 .notification {
+  opacity: 0;
+  animation: ani 1s forwards;
   display: flex;
   align-content: center;
   flex-wrap: wrap;
@@ -257,6 +263,8 @@
 }
 
 .light {
+  opacity: 0;
+  animation: ani 1s forwards;
   position: absolute;
   top: -10px;
   left: 20px;
@@ -268,6 +276,14 @@
   z-index: -100;
 }
 
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .location {
   position: absolute;
 }

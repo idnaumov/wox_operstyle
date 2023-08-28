@@ -1,8 +1,4 @@
-# wox_operstyle
-woxoperstyle
+# stagerp
+Основа для сервера на версии RAGE MP 1.1, разработанная на JavaScript.
 
-# FERTAK IDI NAHUI
-# SAM POSHEL NAHUY DNAUMOV
-# A VOT I NE POYDU IDI SAM
-# NIHUYA DAVAY BISTRO PO OBICHNOMU SVOEMU MARSHRUTU
-# IDI NAHUY, MOI MARSHRUT KOLEDJ I DOMOI
+супермегасервер за 50к$

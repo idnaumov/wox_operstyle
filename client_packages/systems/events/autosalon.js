@@ -1,10 +1,10 @@
-
 var salons = {}
 var opened = false;
 var previewVehicle;
 var type = 0;
 const localPlayer = mp.players.local;
 var inTestdrive = false;
+
 let carBlip;
 
 let carColshape;
@@ -42,6 +42,7 @@ async function setBlip(carObject) {
                     color: 17,
                     dimension: 0,
                     shortRange: true,
+                    scale: 0.9,
                 })
 
                 mp.events.callRemote('Hud_addNotify::SERVER',1,"Точка парковки указана на GPS",7000)
@@ -247,5 +248,3 @@ mp.events.add('Autosalon_testdrive_stop::CLIENT', () => {
     mp.events.call('HUD_setShow::CLIENT', false)
     mp.game.cam.renderScriptCams(true, false, 2000, true, false);
 })
-
-// test

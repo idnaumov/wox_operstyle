@@ -9,23 +9,36 @@
 <body>
     <!-- Авторизация -->
     <div id="auth" v-show="active" v-cloak>
-        <img src="./systems/jobs/taxi/img/bg2.png" class="bg_1">
-        <img src="./systems/auth/img/bg.png" class="bg_1" v-show="state == 1">
-        <img src="./systems/auth/img/bg2.png" class="bg_1" v-show="state == 2">
+        <!-- <img src="./systems/auth/img/bg.png" class="bg_1" v-show="state == 1">
+        <img src="./systems/auth/img/bg2.png" class="bg_1" v-show="state == 2"> -->
         <transition name="fade">
             <div class="login_wrapper" v-show="state == 1">
                 <div class="form_login">
                     <h1>Авторизация</h1>
-                    <p>Нет аккаунта? <span style="color: #5AA2FF; cursor: pointer;" @click="setState(2)">Зарегестрируйтесь</span></p>
+                    <p>Введите все необходимые данные для авторизации</p>
                     <div class="inputs">
-                        <input type="text" v-model="Login.login" placeholder="Введите логин">
-                        <input type="password" v-model="Login.password" placeholder="Введите пароль">
+                        <div class="input ">
+                            <input type="text" v-model="Login.login" placeholder="Введите логин" >
+                        </div>
+                        <div class="input ">
+                            <input type="password" v-model="Login.password" placeholder="Введите пароль" >
+                        </div>
+
                     </div>
-                    <div class="button" @click="loginBtn"><span>АВТОРИЗОВАТЬСЯ</span></div>
-                    <div class="down_btns">
-                        <input type="checkbox" id="checkbox" v-model="Login.checked">
-                        <label for="checkbox" class="label">Запомнить</label>
-                        <p>Забыли пароль?</p>
+                    <div class="buttons">
+                        <button class="button button_login" @click="loginBtn">
+                            <span><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.33325 5.16668C1.33325 3.32573 2.82564 1.83334 4.66659 1.83334H11.3333C13.1742 1.83334 14.6666 3.32573 14.6666 5.16668V11.8333C14.6666 13.6743 13.1742 15.1667 11.3333 15.1667H4.66659C2.82564 15.1667 1.33325 13.6743 1.33325 11.8333V5.16668ZM4.66659 3.16668C3.56202 3.16668 2.66659 4.06211 2.66659 5.16668V11.8333C2.66659 12.9379 3.56202 13.8333 4.66659 13.8333H11.3333C12.4378 13.8333 13.3333 12.9379 13.3333 11.8333V5.16668C13.3333 4.06211 12.4378 3.16668 11.3333 3.16668H4.66659Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0935 5.98785C11.3764 6.22356 11.4146 6.64393 11.1789 6.92679L7.84557 10.9268C7.72919 11.0664 7.56082 11.1525 7.37946 11.1651C7.19811 11.1776 7.01949 11.1156 6.88497 10.9933L4.88497 9.17511C4.61253 8.92744 4.59245 8.5058 4.84013 8.23337C5.0878 7.96093 5.50943 7.94085 5.78187 8.18852L7.26685 9.53851L10.1546 6.07321C10.3903 5.79036 10.8107 5.75214 11.0935 5.98785Z" fill="white"/>
+                            </svg></span>
+                            </span>Авторизоваться</button>
+                        <button class="button button__reReg" @click="setState(2)">
+                            <span><svg width="27" height="21" viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M3.33331 16.8333C3.33331 14.5321 5.19879 12.6666 7.49998 12.6666H12.5C14.8012 12.6666 16.6666 14.5321 16.6666 16.8333C16.6666 18.214 15.5474 19.3333 14.1666 19.3333H5.83331C4.4526 19.3333 3.33331 18.214 3.33331 16.8333ZM7.49998 14.3333C6.11927 14.3333 4.99998 15.4526 4.99998 16.8333C4.99998 17.2935 5.37308 17.6666 5.83331 17.6666H14.1666C14.6269 17.6666 15 17.2935 15 16.8333C15 15.4526 13.8807 14.3333 12.5 14.3333H7.49998Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.99998 4.33329C8.61927 4.33329 7.49998 5.45258 7.49998 6.83329C7.49998 8.214 8.61927 9.33329 9.99998 9.33329C11.3807 9.33329 12.5 8.214 12.5 6.83329C12.5 5.45258 11.3807 4.33329 9.99998 4.33329ZM5.83331 6.83329C5.83331 4.53211 7.69879 2.66663 9.99998 2.66663C12.3012 2.66663 14.1666 4.53211 14.1666 6.83329C14.1666 9.13448 12.3012 11 9.99998 11C7.69879 11 5.83331 9.13448 5.83331 6.83329Z" fill="white"/>
+                                <path d="M24.9258 4.02539C24.3735 4.02539 23.9258 4.47311 23.9258 5.02539V5.81836C23.9258 6.24228 23.5821 6.58594 23.1582 6.58594C22.7343 6.58594 22.3906 6.24228 22.3906 5.81836V5.02539C22.3906 4.47311 21.9429 4.02539 21.3906 4.02539H20.7471C20.3345 4.02539 20 3.69092 20 3.27832C20 2.86572 20.3345 2.53125 20.7471 2.53125H21.3906C21.9429 2.53125 22.3906 2.08353 22.3906 1.53125V0.767578C22.3906 0.343656 22.7343 0 23.1582 0C23.5821 0 23.9258 0.343656 23.9258 0.767578V1.53125C23.9258 2.08353 24.3735 2.53125 24.9258 2.53125H25.5693C25.9819 2.53125 26.3164 2.86572 26.3164 3.27832C26.3164 3.69092 25.9819 4.02539 25.5693 4.02539H24.9258Z" fill="white"/>
+                            </svg></span>                              
+                        </button>
                     </div>
                     <div class="error">{{ error.text }}</div>
                 </div>
@@ -35,103 +48,41 @@
             <div class="login_wrapper" v-show="state == 2">
                 <div class="form_login">
                     <h1>Регистрация</h1>
-                    <p>Уже есть аккаунт? <span style="color: #5AA2FF; cursor: pointer;" @click="setState(1)">Авторизация</span></p>
+                    <p>Введите все необходимые данные для авторизации</p>
                     <div class="inputs">
-                        <input type="text" v-model="Register.login" placeholder="Введите логин">
-                        <input type="text" v-model="Register.email" placeholder="Введите e-mail">
-                        <input type="password" v-model="Register.password" placeholder="Введите пароль">
-                        <input type="password" v-model="Register.rpassword" placeholder="Повторите пароль">
+                        <div class="input ">
+                            <input type="text" v-model="Register.login" placeholder="Введите логин">
+                        </div>
+                        <div class="input ">
+                            <input type="text" v-model="Register.email" placeholder="Введите e-mail">
+                        </div>
+                        <div class="input">
+                            <input type="password" v-model="Register.password" placeholder="Введите пароль">
+                        </div>
+                        <div class="input">
+                            <input type="password" v-model="Register.rpassword" placeholder="Повторите пароль">
+                        </div>
                     </div>
-                    <div class="button" @click="registerBtn"><span>ЗАРЕГИСТРИРОВАТЬСЯ</span></div>
+                    <div class="buttons">
+                        <button class="button button_login" @click="registerBtn">
+                            <span><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.33325 5.16668C1.33325 3.32573 2.82564 1.83334 4.66659 1.83334H11.3333C13.1742 1.83334 14.6666 3.32573 14.6666 5.16668V11.8333C14.6666 13.6743 13.1742 15.1667 11.3333 15.1667H4.66659C2.82564 15.1667 1.33325 13.6743 1.33325 11.8333V5.16668ZM4.66659 3.16668C3.56202 3.16668 2.66659 4.06211 2.66659 5.16668V11.8333C2.66659 12.9379 3.56202 13.8333 4.66659 13.8333H11.3333C12.4378 13.8333 13.3333 12.9379 13.3333 11.8333V5.16668C13.3333 4.06211 12.4378 3.16668 11.3333 3.16668H4.66659Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.0935 5.98785C11.3764 6.22356 11.4146 6.64393 11.1789 6.92679L7.84557 10.9268C7.72919 11.0664 7.56082 11.1525 7.37946 11.1651C7.19811 11.1776 7.01949 11.1156 6.88497 10.9933L4.88497 9.17511C4.61253 8.92744 4.59245 8.5058 4.84013 8.23337C5.0878 7.96093 5.50943 7.94085 5.78187 8.18852L7.26685 9.53851L10.1546 6.07321C10.3903 5.79036 10.8107 5.75214 11.0935 5.98785Z" fill="white"/>
+                            </svg></span>
+                            </span>Зарегистрироваться</button>
+                        <button class="button button__reReg" @click="setState(1)">
+                            <span><svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.333313 14.8333C0.333313 12.5321 2.19879 10.6666 4.49998 10.6666H9.49998C11.8012 10.6666 13.6666 12.5321 13.6666 14.8333C13.6666 16.214 12.5474 17.3333 11.1666 17.3333H2.83331C1.4526 17.3333 0.333313 16.214 0.333313 14.8333ZM4.49998 12.3333C3.11927 12.3333 1.99998 13.4526 1.99998 14.8333C1.99998 15.2935 2.37308 15.6666 2.83331 15.6666H11.1666C11.6269 15.6666 12 15.2935 12 14.8333C12 13.4526 10.8807 12.3333 9.49998 12.3333H4.49998Z" fill="white"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.99998 2.33329C5.61927 2.33329 4.49998 3.45258 4.49998 4.83329C4.49998 6.214 5.61927 7.33329 6.99998 7.33329C8.38069 7.33329 9.49998 6.214 9.49998 4.83329C9.49998 3.45258 8.38069 2.33329 6.99998 2.33329ZM2.83331 4.83329C2.83331 2.53211 4.69879 0.666626 6.99998 0.666626C9.30117 0.666626 11.1666 2.53211 11.1666 4.83329C11.1666 7.13448 9.30117 8.99996 6.99998 8.99996C4.69879 8.99996 2.83331 7.13448 2.83331 4.83329Z" fill="white"/>
+                                </svg>
+                                </span>                              
+                        </button>
+                    </div>
                     <div class="error">{{ error.text }}</div>
                 </div>
             </div>
         </transition>
     </div>
-
-<!-- мини уведы -->
-    <div id="miniuvedi" v-show="active" v-cloak>
-        <img src="./systems/cars/img/bgmini.png" class="centerimage">
-        <p :class= "[textclass]">{{text}}</p>
-        <transition name="fade">
-    </div>
-
-        <!-- Меню машин -->
-        <div id="cars" v-show="active" v-cloak>
-            <img src="./systems/cars/img/bg.png" class="bg">
-            <div class="main_wrapper">
-
-
-
-                <!-- v-if="show == 3" -->
-                <div class="up"><span>Машины</span></div>
-                <div class="body_flex">
-                    <div class="body">
-                        <div class="body_wrapper">
-                            <div class="parametr">
-                            </div>
-                            <div class="parametr" v-if="show == 1">
-
-                                    <div class="parent_w_img">
-                                        <div class="parametr_name" v-if="cars[0] != undefined">
-                                            <div class="strip"></div>
-                                            <p class="sosamba" @click="open('first');">{{cars[0].model.toUpperCase()}} {{cars[0].id}}</p>
-                                        </div>
-                                        <div class="parametr_name" v-if="cars[1] != undefined">
-                                            <div class="strip"></div>
-                                            <p class="sosamba" @click="open('two');">{{cars[1].model.toUpperCase()}} {{cars[1].id}}</p>
-                                        </div>
-                                        <div class="parametr_name" v-if="cars[2] != undefined">
-                                            <div class="strip"></div>
-                                            <p class="sosamba" @click="open('three');">{{cars[2].model.toUpperCase()}} {{cars[2].id}}</p>
-                                        </div>
-                                        <div class="parametr_name" v-if="cars[3] != undefined">
-                                            <div class="strip"></div>
-                                            <p class="sosamba" @click="open('four');">{{cars[3].model.toUpperCase()}} {{cars[3].id}}</p>
-                                        </div>
-                                        <div class="parametr_name" v-if="cars[4] != undefined">
-                                            <div class="strip"></div>
-                                            <p class="sosamba" @click="open('five');">{{cars[4].model.toUpperCase()}} {{cars[4].id}}</p>
-                                        </div>
-                                        <div class="parametr_name" v-if="cars[5] != undefined">
-                                            <div class="strip"></div>
-                                            <p class="sosamba" @click="open('six');">{{cars[5].model.toUpperCase()}} {{cars[5].id}}</p>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="parametr" v-if="show == 2">
-                                <div class="type_wrapper">
-                                    <div class="type_btn" @click="towtruck()"><img src="./systems/cars/img/towtruck.png" alt="">
-                                    </div>
-
-                                    <div class="type_btn" @click="gps()"><img src="./systems/cars/img/gps.png" alt="">
-                                    </div> 
-
-                                    <div class="type_btn" id="loadupload"><img :src="itemImage()">
-                                    </div>
-
-                                    <div class="type_btn" @click="lock()"><img src="./systems/cars/img/lock.png" alt="">
-                                        </div>
-
-                                </div>
-
-                        </div>
-                        </div>
-
-                        
-
-                        <div class="main_buttons">
-                            <div class="create_btn" @click="back();"><span>Назад</span></div>
-                        </div>
-                    </div>
-
-                    
-                </div>
-                
-            </div>
-
-        </div>
-        
     <!-- Создание персонажа -->
     <div id="pedCreator" v-show="active" v-cloak>
         <img src="./systems/pedCreator/img/bg.png" class="bg">
@@ -526,6 +477,137 @@
             </div>
         </div>
     </div>
+
+    <!-- машины -->
+
+    <div id="auto" v-show="active" v-cloak>
+        <img src="./systems/auto/img/bg3.png" class="bg" v-if="open == 1">
+
+        <div class="auto-first-wnd-wrapper" v-if="open == 1">
+
+            <h1>Автосалон</h1>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <div class="auto-first-button auto-first-button-start" v-if="IsIn == false" @click="tpToAuto">
+                <span>Зайти</span>
+            </div>
+            
+            <div class="auto-first-button auto-first-button-leave" v-if="IsIn == true" @click="tpToStreet">
+                <span>Выйти</span>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- мини уведы -->
+    <div id="miniuvedi" v-show="active" v-cloak>
+        <img src="./systems/cars/img/bgmini.png" class="centerimage">
+        <p :class= "[textclass]">{{text}}</p>
+        <transition name="fade">
+    </div>
+
+        <!-- Меню машин -->
+        <div id="cars" v-show="active" v-cloak>
+            <div class="main">
+            <div class="main-box">
+                <div class="main-text">
+                    <span class="rotate-text">Управление вашими ТС</span>
+                    <span class="description">Выберите нужную машину для <br> продолжения, если вы передумали или у вас <br>ее нет вы можете вернуться назад</span>
+                </div>
+    
+                <div class="parametr" v-if="show == 1">
+                    <div class="parametr_column">
+
+                        <div class="parametr_bg" @click="back();">
+                            <div class="parametr_name">
+                                <img src="./systems/cars/img/close.svg" alt="car_icon">
+                                <p class="car_name">Закрыть</p>
+                            </div>
+                        </div>  
+                        
+                    <div class="parametr_bg" v-if="cars[0] != undefined" @click="open('first');">
+                        <div class="parametr_name" v-if="cars[0] != undefined">
+                            <img src="./systems/cars/img/arrow.svg" alt="car_icon">
+                            <p class="car_name">{{cars[0].model.toUpperCase()}} {{cars[0].id}}</p>
+                        </div>
+                    </div>
+                    <div class="parametr_bg" v-if="cars[1] != undefined" @click="open('two');">
+                        <div class="parametr_name" v-if="cars[1] != undefined">
+                            <img src="./systems/cars/img/arrow.svg" alt="car_icon">
+                            <p class="car_name">{{cars[1].model.toUpperCase()}} {{cars[1].id}}</p>
+                        </div>
+                    </div>
+                    <div class="parametr_bg" v-if="cars[2] != undefined" @click="open('three');">
+                        <div class="parametr_name" v-if="cars[2] != undefined">
+                            <img src="./systems/cars/img/arrow.svg" alt="car_icon">
+                            <p class="car_name">{{cars[2].model.toUpperCase()}} {{cars[2].id}}</p>
+                        </div>
+                    </div>
+                    <div class="parametr_bg" v-if="cars[3] != undefined" @click="open('four');">
+                        <div class="parametr_name" v-if="cars[3] != undefined">
+                            <img src="./systems/cars/img/arrow.svg" alt="car_icon">
+                            <p class="car_name">{{cars[3].model.toUpperCase()}} {{cars[3].id}}</p>
+                        </div>
+                    </div>
+                    <div class="parametr_bg" v-if="cars[4] != undefined" @click="open('five');">
+                        <div class="parametr_name" v-if="cars[4] != undefined">
+                            <img src="./systems/cars/img/arrow.svg" alt="car_icon">
+                            <p class="car_name">{{cars[4].model.toUpperCase()}} {{cars[4].id}}</p>
+                        </div>
+                    </div>
+                    <div class="parametr_bg" v-if="cars[5] != undefined" @click="open('six');">
+                        <div class="parametr_name" v-if="cars[5] != undefined">
+                            <img src="./systems/cars/img/arrow.svg" alt="car_icon">
+                            <p class="car_name">{{cars[5].model.toUpperCase()}} {{cars[5].id}}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+    
+                <div class="parametr" v-if="show == 2">
+                    <div class="parametr_column">
+
+                        <div class="parametr_bg" @click="back();">
+                            <div class="parametr_name">
+                                <img src="./systems/cars/img/close.svg" alt="car_icon">
+                                <p class="car_name">Назад</p>
+                            </div>
+                        </div>  
+    
+                        <div class="parametr_bg" @click="lock()">
+                            <div class="parametr_name">
+                                <img src="./systems/cars/img/lock.svg" alt="car_icon">
+                                <p class="car_name">Открыть/закрыть</p>
+                            </div>
+                        </div>
+    
+                        <div class="parametr_bg" @click="loadupload">
+                            <div class="parametr_name">
+                                <img src="./systems/cars/img/unload.svg" alt="car_icon">
+                                <p class="car_name">Выгрузить</p>
+                            </div>
+                        </div>
+    
+                        <div class="parametr_bg" @click="towtruck()">
+                            <div class="parametr_name">
+                                <img src="./systems/cars/img/loadcar.svg" alt="car_icon">
+                                <p class="car_name">Эвакуировать</p>
+                            </div>
+                        </div>
+    
+                        <div class="parametr_bg" @click="gps()">
+                            <div class="parametr_name">
+                                <img src="./systems/cars/img/gps.svg" alt="car_icon">
+                                <p class="car_name">Найти</p>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
     <!-- Худ -->
     <div id="HUD_main" v-show="active" v-cloak>
         <div class="right_up">
@@ -620,7 +702,7 @@
                 </div>
             </div>
         </transition>
-    </div></div><!-- -->
+    </div></div>
     <!-- Чат -->
     <div id="HUD_chat" v-show="active" v-cloak>
         <div class="chat_wrapper">
@@ -630,10 +712,10 @@
         </div>
         <input class="input" v-show="open" v-model="message" v-on:keyup.enter="sendMessage" v-focus="open == true">
         <div class="buttons" v-show="open">
-            <span v-bind:style="{ 'border-bottom': border_color1 }">Обычный</span>
+            <!-- <span v-bind:style="{ 'border-bottom': border_color1 }">Обычный</span>
             <span v-bind:style="{ 'border-bottom': border_color2 }">Реальный</span>
             <span v-bind:style="{ 'border-bottom': border_color3 }">Ролеплей</span>
-            <span v-bind:style="{ 'border-bottom': border_color4 }">Рация</span>
+            <span v-bind:style="{ 'border-bottom': border_color4 }">Рация</span> -->
         </div>
     </div>
     <!-- Автосалон -->
@@ -775,83 +857,113 @@
     </div>
     <!-- Инвентарь -->
     <div id="inventory" v-show="active" v-cloak>
-        <transition name="fade">
-            <img src="./systems/inventory/img/bg.png" class="bg" v-show="active">
+    <transition name="fade">
+        <img src="./systems/inventory/img/bg.png" class="bg" v-show="active">
+    </transition>
+    <div class="main_wrapper" @mousedown="clickEmpty">
+        <transition name="slide-fade">
+            <div class="player-skin-wrapper" v-show="active">
+                <div class="player-skin-texts">
+                    <h1>{{ player.name }} <span style="font-family: Gilroy;font-style: normal;font-weight: normal;font-size: 2.4vh;color: rgba(255, 255, 255, 0.5);">{{
+                            player.lvl }}lvl</span></h1>
+                    <p>Ваш персонаж</p>
+                </div>
+                <div class="player-skin">
+                    <div class="player-skin-slots">
+                        <div class="player-skin-slot" id="clothes_cap">
+                            <img id = 'default' src="./systems/inventory/img/skin-items/cap.svg">
+                        </div>
+                        <div class="player-skin-slot" id="clothes_watch">
+                            <img id = 'default' src="./systems/inventory/img/skin-items/wristwatch.svg">
+                        </div>
+                        <div class="player-skin-slot" id="clothes_necklace">
+                            <img id = 'default' src="./systems/inventory/img/skin-items/necklace.svg">
+                        </div>
+                        <div class="player-skin-slot" id="clothes_top"><img id = 'default' src="./systems/inventory/img/skin-items/blazer.svg" alt=""></div>
+                        <div class="player-skin-slot" id="clothes_shoes"><img id = 'default' src="./systems/inventory/img/skin-items/shoes.svg" alt=""></div>
+                    </div>
+                    <img src="./systems/inventory/img/skin.svg" alt="">
+                    <div class="player-skin-slots">
+                        <div class="player-skin-slot" id="clothes_mask"><img id = 'default' src="./systems/inventory/img/skin-items/mask.svg" alt="">
+                        </div>
+                        <div class="player-skin-slot" id="clothes_sunglasses"><img id = 'default' src="./systems/inventory/img/skin-items/sunglasses.svg" alt=""></div>
+                        <div class="player-skin-slot" id="clothes_gloves"><img id = 'default' src="./systems/inventory/img/skin-items/gloves.svg" alt=""></div>
+                        <div class="player-skin-slot" id="clothes_underwear">
+                            <img id = 'default' src="./systems/inventory/img/skin-items/shirt.svg">
+                        </div>
+                        <div class="player-skin-slot" id="clothes_legs"><img id = 'default' src="./systems/inventory/img/skin-items/trousers.svg" alt=""></div>
+                    </div>
+                </div>
+            </div>
         </transition>
-        <div class="main_wrapper" @mousedown="clickEmpty">
-            <transition name="slide-fade">
-                <div class="player-skin-wrapper" v-show="active">
-                    <div class="player-skin-texts">
-                        <h1>{{ player.name }} <span style="font-family: Gilroy;font-style: normal;font-weight: normal;font-size: 2.4vh;color: rgba(255, 255, 255, 0.5);">{{
-                                player.lvl }}lvl</span></h1>
-                        <p>Ваш персонаж</p>
-                    </div>
-                    <div class="player-skin">
-                        <div class="player-skin-slots">
-                            <div class="player-skin-slot" id="clothes_cap">
-                                <img id = 'default' src="./systems/inventory/img/skin-items/cap.svg">
-                            </div>
-                            <div class="player-skin-slot" id="clothes_watch">
-                                <img id = 'default' src="./systems/inventory/img/skin-items/wristwatch.svg">
-                            </div>
-                            <div class="player-skin-slot" id="clothes_necklace">
-                                <img id = 'default' src="./systems/inventory/img/skin-items/necklace.svg">
-                            </div>
-                            <div class="player-skin-slot" id="clothes_top"><img id = 'default' src="./systems/inventory/img/skin-items/blazer.svg" alt=""></div>
-                            <div class="player-skin-slot" id="clothes_shoes"><img id = 'default' src="./systems/inventory/img/skin-items/shoes.svg" alt=""></div>
-                        </div>
-                        <img src="./systems/inventory/img/skin.svg" alt="">
-                        <div class="player-skin-slots">
-                            <div class="player-skin-slot" id="clothes_mask"><img id = 'default' src="./systems/inventory/img/skin-items/mask.svg" alt="">
-                            </div>
-                            <div class="player-skin-slot" id="clothes_sunglasses"><img id = 'default' src="./systems/inventory/img/skin-items/sunglasses.svg" alt=""></div>
-                            <div class="player-skin-slot" id="clothes_gloves"><img id = 'default' src="./systems/inventory/img/skin-items/gloves.svg" alt=""></div>
-                            <div class="player-skin-slot" id="clothes_underwear">
-                                <img id = 'default' src="./systems/inventory/img/skin-items/shirt.svg">
-                            </div>
-                            <div class="player-skin-slot" id="clothes_legs"><img id = 'default' src="./systems/inventory/img/skin-items/trousers.svg" alt=""></div>
-                        </div>
+        <transition name="slide-fade2">
+            <div class="list-slots-wrapper" v-show="active">
+                <div class="list-slots-texts">
+                    <h1>Ваши предметы</h1>
+                    <p>Вес 15/30 кг</p>
+                </div>
+                <div class="slots">
+                    <div class="slot" v-for="i in 28" :id="i + ' inv'">
+                        <!-- <div class="item" onClick="clickItem(1)" id="1" style="background-image: url('./systems/inventory/img/items/109.png'); background-repeat: no-repeat;"></div> -->
                     </div>
                 </div>
-            </transition>
-            <transition name="slide-fade2">
-                <div class="list-slots-wrapper" v-show="active">
-                    <div class="list-slots-texts">
-                        <h1>Ваши предметы</h1>
-                        <p>Вес 15/30 кг</p>
+
+                <!-- <img src="./systems/inventory/img/items/car.png" alt="" class="imgfast"> -->
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="fastslots">
+                    <div class="fastslot" v-for="i in 3" :id="i + ' fast'">
+                     <p :id="i + 'fast'" id = 'default' class="fastslottext">{{ i }}</p>
                     </div>
-                    <div class="slots">
-                        <div class="slot" v-for="i in 28" :id="i">
-                        </div>
                     </div>
-                    
-                    <img src="./systems/inventory/img/items/car.png" alt="" class="imgcar" v-if="incar == 1">
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <div class="slotscar" v-if="incar == 1">
-                        <div class="slotcar" v-for="i in 7" :id="i">
-                        </div>
-                        </div>
-                </div>
-            </transition>
-            <transition name="fade">
-                <div class="modal-window-wrapper" v-show="modal.active">
-                    <div class="modal-window" v-bind:style="{ left: modal.posX + 'px', top: modal.posY + 'px'}">
-                        <div class="modal-img">
-                            <img :src="modal.img">
-                            <h1>{{ modal.name }}</h1>
-                            <p>{{ modal.count }} шт.</p>
-                        </div>
-                        <p class="modal-desc">{{modal.desc}}</p>
-                        <hr>
-                        <div class="modal-buttons-wrapper">
-                            <div class="modal-buttons-btn modal-buttons-use"><span>Использовать</span></div>
-                            <div class="modal-buttons-btn modal-buttons-drop"><span>Выбросить</span></div>
-                        </div>
+                
+                <img src="./systems/inventory/img/items/car.png" alt="" class="imgcar" v-if="incar == 1">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="slotscar" v-if="incar == 1">
+                    <div class="slotcar" v-for="i in 7" :id="i + ' car'">
+                    </div>
+                    </div>
+            </div>
+        </transition>
+        <transition name="fade">
+            <div class="modal-window-wrapper" v-show="modal.active">
+                <div class="modal-window" v-bind:style="{ left: modal.posX + 'px', top: modal.posY + 'px'}">
+                    <div class="modal-img">
+                        <img :src="modal.img">
+                        <h1>{{ modal.name }}</h1>
+                        <p>{{ modal.count }} шт.</p>
+                    </div>
+                    <p class="modal-desc">{{modal.desc}}</p>
+                    <hr>
+                    <div class="modal-buttons-wrapper">
+                        <div class="modal-buttons-btn modal-buttons-use" @click="useItem(false, 0)"><span>Использовать</span></div>
+                        <div class="modal-buttons-btn modal-buttons-drop"><span>Выбросить</span></div>
                     </div>
                 </div>
-            </transition>
-        </div>
+            </div>
+        </transition>
+
+        <transition name="fade">
+            <div class="modal-window-wrapper" v-show="modal2.active">
+                <div class="modal-window" v-bind:style="{ left: modal2.posX + 'px', top: modal2.posY + 'px'}">
+                    <div class="modal-buttons-wrapper">
+                        <div class="btnfast"><span @click="fastSlot">Назначить быстрый слот</span></div>
+                    </div>
+                </div>
+            </div>
+        </transition>
+
+        <transition name="fade">
+            <div class="modal-window-wrapper" v-show="modal3.active">
+                <div class="modal-window" v-bind:style="{ left: 450 + 'px', top: 300 + 'px'}">
+                    <p class="modal-desc">Нажмите кнопку, чтобы назначить слот</p>
+                    <hr>
+                </div>
+            </div>
+        </transition>
+
+
     </div>
+</div>
     <!-- Меню -->
     <div id="menu" v-show="active" v-cloak>
         <img src="./systems/menu/img/main/bg.png" class="menu-main-bg" v-if="open == 0">
@@ -1532,77 +1644,61 @@
                 </div>
             </transition>
     </div>
+    <!-- Дом -->
     <div id="houses" v-show="active" v-cloak>
         <div class="house-wrapper" v-show="activeMain">
-            <img src="./systems/houses/img/bg.png" class="house-bg">
-            <div class="house-prompt-wrapper">
-                <div class="house-prompt-button" style="width: 7.5vh;"><span>ESC</span></div>
-                <p>закрыть окно</p>
-            </div>
-            <!-- <img src="./systems/houses/img/figura1.svg" class="house-b"> -->
             <div class="house-container">
-                <div class="house-text-h-wrapper">
-                    <h1>Дом:</h1>
-                    <p>#{{id}}</p>
-                </div>
-                <div class="house-container-texts">
-                    <!-- <div class="house-container-texts-text">
-                        <h1>Страховка:</h1>
-                        <p>0 дней</p>
-                    </div> -->
-                    <div class="house-container-texts-text">
-                        <h1>Владелец:</h1>
-                        <p>{{ ownerName }}</p>
+                <div class="house-bg">
+                    <div class="left-side">
+                            <div class="left-text">
+                            <span class="house-id">Дом: #{{id}}</span>
+                            <span class="house-text-other">Выберите нужное <br>вам действие</span>
+                        </div>
+                        <div class="dies">
+                            <div class="dies-up">
+                                <div class="house-info">
+                                    <h1>Владелец:&nbsp;</h1>
+                                    <p> {{ ownerName }}</p>
+                                </div>
+                                <div class="house-info">
+                                    <h1>Класс дома:&nbsp;</h1>
+                                    <p>{{ houseClass }}</p>
+                                </div>
+                            </div>
+                            <div class="dies-down">
+                                <div class="house-info">
+                                    <h1>Мест в гараже:&nbsp;</h1>
+                                    <p>2</p>
+                                </div>
+                                <div class="house-info">
+                                    <h1>Стоимость:&nbsp;</h1>
+                                    <p>{{ price }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="house-container-texts-text">
-                        <h1>Класс дома:</h1>
-                        <p>{{ houseClass }}</p>
+                    <div class="house-container-buttons">
+                        <div class="house-container-button" v-if="ifOwner" @click="sellHouse">
+                            <span>💰 Продать дом</span>
+                        </div>
+                        <div class="house-container-button" v-if="ownerName == 'Государство'" @click="buyHouse">
+                            <span>💰 Купить дом</span>
+                        </div>
+                        <div class="house-container-button" v-if="ifOwner && ifLocked == 2" @click="unlockHouse">
+                            <span>🔓 Открыть</span>
+                        </div>
+                        <div class="house-container-button" v-if="ifOwner && ifLocked == 1" @click="lockHouse">
+                            <span>🔒 Закрыть</span>
+                        </div>
+                        <div class="house-container-button" @click="enterHouse">
+                            <span>🚪 Войти</span>
+                        </div>
                     </div>
-                    <div class="house-container-texts-text">
-                        <h1>Плата в день:</h1>
-                        <p>$23</p>
-                    </div>
-                    <div class="house-container-texts-text">
-                        <h1>Стоимость</h1>
-                        <p>{{ price }}</p>
-                    </div>
-                    <div class="house-container-texts-garage" style="float: right;">
-                        <img src="./systems/houses/img/garage.svg" alt="">
-                        <p>Мест в гараже: <span style="color: rgba(255, 255, 255, 1);">2</span></p>
-                    </div>
-                </div>
-                <div class="house-container-buttons">
-                    <div class="house-container-button" v-if="ifOwner" @click="sellHouse">
-                        <img src="./systems/houses/img/sell.svg" alt="">
-                        <span>Продать дом</span>
-                    </div>
-                    <div class="house-container-button" v-if="ownerName == 'Государство'" @click="buyHouse">
-                        <img src="./systems/houses/img/buy.svg" alt="">
-                        <span>Купить</span>
-                    </div>
-                    <div class="house-container-button" v-if="ifOwner && ifLocked == 2" @click="unlockHouse">
-                        <img src="./systems/houses/img/unlocked.svg" alt="">
-                        <span>Открыть</span>
-                    </div>
-                    <div class="house-container-button" v-if="ifOwner && ifLocked == 1" @click="lockHouse">
-                        <img src="./systems/houses/img/locked.svg" alt="">
-                        <span>Закрыть</span>
-                    </div>
-                    <div class="house-container-button" @click="enterHouse">
-                        <img src="./systems/houses/img/house.svg" alt="">
-                        <span>Войти</span>
-                    </div>
-                    <!-- <div class="house-container-button" @click="enterGarage">
-                        <img src="./systems/houses/img/garage.svg" alt="">
-                        <span>Гараж</span>
-                    </div> -->
                 </div>
             </div>
         </div>
+        <!-- Модалка дома -->
         <div class="exit-wrapper" v-show="acitveExits">
-            <img src="./systems/houses/img/bg.png" class="house-bg">
-            <img src="./systems/houses/img/figura2.svg" class="house-b">
-            <img src="./systems/houses/img/points.png" class="house-b" style="width: 38vh; height: 52vh;">
             <div class="exit-container">
                 <h1>Выход</h1>
                 <div class="exit-buttons">
@@ -1619,21 +1715,25 @@
             </div>
         </div>
     </div>
+    <!-- Автошкола-->
     <div id="autoschool" v-show="active" v-cloak>
         <img src="./systems/autoschool/img/bg.png" class="bg">
         <p class="text-center">Центр лицензирования</p>
         <div class="autoschool-tabs-wrapper">
             <div class="autoschool-tab">
                 <img src="./systems/autoschool/img/icon_car.png" class="autoschool-tab-logo">
+                <div class="taxi-rent-taxi-button taxi-rent-close" @click="close">
+                    <span>Отмена</span>
+                </div>
                 <div class="autoschool-tab-texts">
                     <h1>Легковые авто</h1>
                     <p>Стоймость сдачи экзамена - 500$</p>
                 </div>
-                <div class="autoschool-tab-button">
-                    <p>Хуй</p>
+                <div @click="exam(1)" class="autoschool-tab-button">
+                    <p>Начать</p>
                 </div>
             </div>
-            <div class="autoschool-tab">
+            <!-- <div class="autoschool-tab">
                 <img src="./systems/autoschool/img/icon_car.png" class="autoschool-tab-logo">
                 <div class="autoschool-tab-texts">
                     <h1>Легковые авто</h1>
@@ -1662,7 +1762,7 @@
                 <div class="autoschool-tab-button">
                     <p>Хуй</p>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- ----[Работы]------ -->
@@ -1753,7 +1853,7 @@
         <transition-group name="fade">
             <div class="farm-info-wrapper" :key="1">
                 <h1>Газонокосильщик</h1>
-                <p>Косить траву надо
+                <p>АХАВЫХАХЫАХХВЫАХЫВХАХ
                 </p>
                 <div class="farm-info-button start" @click="startWork" v-if="!isWork">
                     <span>Устроиться</span>
@@ -1766,27 +1866,6 @@
             </div>
             </transition>
     </div>
-
-    <div id="auto" v-show="active" v-cloak>
-        <img src="./systems/auto/img/bg3.png" class="bg" v-if="open == 1">
-
-        <div class="auto-first-wnd-wrapper" v-if="open == 1">
-
-            <h1>Автосалон</h1>
-
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-            <div class="auto-first-button auto-first-button-start" v-if="IsIn == false" @click="tpToAuto">
-                <span>Зайти</span>
-            </div>
-            
-            <div class="auto-first-button auto-first-button-leave" v-if="IsIn == true" @click="tpToStreet">
-                <span>Выйти</span>
-            </div>
-
-        </div>
-    </div>
-
     <div id="taxi" v-show="active" v-cloak>
         <img src="./systems/jobs/taxi/img/bg.png" class="bg" v-if="open == 1">
         <img src="./systems/jobs/taxi/img/bg2.png" class="bg" v-if="open == 2">
@@ -1801,7 +1880,7 @@
             <div class="taxi-first-button taxi-first-button-leave" v-if="isWork == true" @click="leaveWork">
                 <span>Уволиться</span>
             </div>
-            <h2>Ваш уровень: Неизвестен</h2>
+            <h2>Ваш уровень: баг диа</h2>
         </div>
         <div class="taxi-oders-wrapper" v-if="open == 2">
             <div class="taxi-order-wrapper" v-for="(item,i) in orders">
@@ -1848,46 +1927,6 @@
             </div>
         </div>
     </div>
-
-    <div id="clothes" v-show="active" v-cloak>
-        <h1 class="name left">Выберите тип одежды</h1>
-        <div class="clothes_type" v-show="active" v-cloak>
-            <div class="wrapper">
-                <ul class="clothes_list">
-                    <li class="cloth_item" v-for="(item,i) in tClothType" :key="item.type" @click="selectedType = item.type, loadCloth()" :class="{ active: item.type === selectedType }">
-                        <p class="name">{{item.name}}</p>
-                    </li>
-                </ul>
-                <a href="#" class="btn-exit" @click="closeButton()">ВЫЙТИ</a>
-            </div>
-        </div>
-        <div class="clothes_menu" v-if="selectedType !== null">
-            <h1 class="name right">Список доступной одежды</h1>
-            <h2 class="subname right">{{selectedName}}</h2>
-            <div class="wrapper">
-                
-                <div class="hints">
-                    <p>ВЕЩЬ</p>
-                    <p>ЦЕНА</p>
-                </div>
-                <ul class="clothes_list">
-                    <li class="cloth_item" v-for="(item, i) in tClothType.find(type => type.type === selectedType).items" :key="i" :class="{ active: clicked === i }" @click="clicked = i, setPreviewCloth(item.clothId, item.id, item.bodyID, item), checkColors(item)">
-                        <p class="name currentclothname">{{item.name}}</p>
-                        <p class="price">${{item.price}}</p>
-                    </li>
-                </ul>
-                <a href="#" class="btn-buy" @click="buyButton()">ПРИОБРЕСТИ</a>
-                <div class="color_slider" v-if="activateColors">
-                    <img src="./systems/clothes/img/slider.svg" alt="slide_left" class="slider_btn left" @click="countMinus">
-                    <p>Цвет: {{currentColor}}/{{maxColors}}</p>
-                    <img src="./systems/clothes/img/slider.svg" alt="slide_right" style="rotate:180deg;" class="slider_btn right" @click="countPlus">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
 </body>
 
 <script>
@@ -1907,7 +1946,6 @@
 <script src="./systems/auth/auth.js"></script>
 <script src="./systems/pedCreator/editor.js"></script>
 <script src="./systems/charSelector/index.js"></script>
-<script src="./systems/clothes/clothes.js"></script>
 <!-- HUD -->
 <script src="./systems/Hud/main.js"></script>
 <script src="./systems/Hud/speedometr.js"></script>
@@ -1916,9 +1954,13 @@
 <!-- Инвентарь -->
 <script src="./systems/inventory/inventory.js"></script>
 <script src="./systems/menu/menu.js"></script>
+<script src="./systems/cars/cars.js"></script>
 
 <!-- Автосалон -->
 <script src="./systems/Autosalon/autosalon.js"></script>
+
+<!-- Автосалон заход -->
+<script src="./systems/auto/auto.js"></script>
 
 <!-- Банк -->
 
@@ -1936,12 +1978,3 @@
 <script src="./systems/jobs/bus/bus.js"></script>
 <script src="./systems/jobs/mower/mower.js"></script>
 <script src="./systems/jobs/taxi/taxi.js"></script>
-
-<!-- Магазин одежды -->
-
-<!-- Автосалон заход -->
-<script src="./systems/auto/auto.js"></script>
-<!-- cars -->
-<script src="./systems/cars/cars.js"></script>
-<!-- mini uvedomleniya -->
-<script src="./systems/miniuvedi/miniuvedi.js"></script>

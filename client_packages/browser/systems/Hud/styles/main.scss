@@ -1,4 +1,6 @@
-// body {background-color: black;}
+body {
+    overflow: hidden;
+}
 
 #HUD_main {
     .right_up {
@@ -268,6 +270,8 @@
 }
 
 .notification {
+    opacity: 0;
+    animation: ani 1s forwards;
     display: flex;
     align-content: center;
     flex-wrap: wrap;
@@ -290,8 +294,10 @@
     font-weight: 600;
     line-height: normal;
   }
-  
+
   .light {
+    opacity: 0;
+    animation: ani 1s forwards;
     position: absolute;
     top: -10px;
     left: 20px;
@@ -302,6 +308,12 @@
     box-shadow: 0px 0px 10px 0px rgba(66, 255, 0, 0.50);
     z-index: -100;
   }
+
+  @keyframes ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+  }
+  
 
 .location {
     position: absolute;

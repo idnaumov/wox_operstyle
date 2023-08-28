@@ -94,8 +94,8 @@ mp.events.add('render', () => {
         }
         
         browser.execute(`HUD.speedElements.speed = ${speed < 10 ? `'00${speed}'` : speed < 100 ? `'0${speed}'` : `'${speed}'`}`);
-
         browser.execute(`HUD.speedElements.gear = '${gear}'`)
+        
         browser.execute(`HUD.carElements.engine = ${vehicle.getIsEngineRunning()}`)
         browser.execute(`HUD.carElements.seatbelt = ${!player.getConfigFlag(32, false)}`)
     }

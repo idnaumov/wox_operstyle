@@ -1,59 +1,80 @@
 try{
-require('./modules/mysql');
-require('./modules/methods');
 
-require('./events/auth'); // Авторизация
-require('./events/pedCreator'); // Создание персонажа
-require('./events/charselector'); // Выбор персонажа
+// Модули, утилиты, методы
+
+require('./modules/mysql'); // База данных
+require('./modules/methods'); // Методы
+require('./utilities/time'); // Система времени
+require('./utilities/weather'); // Система погоды
+require('./utilities/items'); // Предметы
+require('./utilities/death'); // Система смерти
+require('./utilities/zones'); // Зеленые зоны
+
+// Основное
+
+require('./events/basic/auth'); // Авторизация/регистрация
+require('./events/basic/pedCreator'); // Создание персонажа
+require('./events/basic/charselector'); // Выбор персонажа
+require('./events/basic/hud'); // Худ
+require('./events/basic/money'); // Деньги
+require('./events/basic/voice'); // Голосовой чат
+require('./events/basic/weaponcompsync'); // Оружия и их улучшения
+
+// Бизнесы
+
+require('./business/rent'); // Аренда ТС
+require('./business/autosalon'); // Автосалон
+require('./business/bank'); // Банк
+
+// Events
+
 require('./events/admin'); // Админ система
-require('./events/hud'); // Худ
-require('./events/autosalon'); // Автосалон
-require('./events/money'); // Автосалон
 require('./events/commands'); // Команды
-require('./events/bank'); // Банк
-require('./events/time'); // Сиситема времени
 require('./events/inventory'); // Инвентарь
-require('./events/voice'); // Войс чат
-require('./events/weaponcompsync'); // Оружия и их улучшения
 require('./events/houses'); // Дома
 require('./events/menu'); // Меню
 
-require('./camera/index'); // Меню
-
-//cas
-require('./events/casino')
-require('./luckywheel/index');
-//
-
-//car
-require('./autosalon/auto');
-//
-
-//shops
-require('./shops/cloth');
-require('./shops/barber');
-//
-
 // Работы
 
-require('./jobs/farm')
-require('./jobs/bus')
-require('./jobs/lawnmower')
-require('./jobs/taxi')
+require('./jobs/farm');
+require('./jobs/bus');
+require('./jobs/lawnmower');
+require('./jobs/taxi');
+
+// Ораганизации
+
+require('./fractions/index'); // Основное
+
+        // Гос
+        
+        require('./fractions/gov/autoschool');
+
+        // Крайм
+
+        require('./fractions/ghetto/ghetto_zones');
+        require('./fractions/ghetto/aztecas');
+
+
 
 mp.events.add('console_log', (player,arg) => {
     console.log(arg);
 })
 
-mp.events.add('playerDeath',(player) => {
-    player.spawn(player.position)
+mp.events.add('OnPlayerExitVehicle',(player) => {
+        if(player.getConfigFlag(32) == false) {
+        player.setConfigFlag(32, true);
+        mp.events.call('Hud_addNotify::SERVER',3,"Вы отстегнули ремень безопасности",7000)
+        }
 })
+
 mp.events.add('playerExitVehicle',(player, vehicle) => {
     player.call('offSeatBelt::CLIENT', player)
     vehicle.engine = vehicle.engine
 })
 
-}catch(err){
+}
+
+catch(err){
     console.log(err)
 }
 
@@ -96,10 +117,12 @@ mp.world.requestIpl("hei_dlc_casino_aircon"); // кондиционер на к�
 mp.world.requestIpl("vw_casino_main");
 mp.world.requestIpl("vw_casino_garage");
 mp.world.requestIpl("vw_casino_carpark"); 
-mp.world.requestIpl("vw_casino_penthouse");
+mp.world.requestIpl("shr_int");
+mp.world.requestIpl("shr_int_lod");
+mp.world.requestIpl("gabz_mrpd_milo_");
+mp.world.requestIpl("TrevorsTrailerTidy");
 
-
-let chat = require("./events/hud");
+let chat = require("./events/basic/hud");
 mp.events.add('controlEngineState::SERVER', (player) => {
     let veh = player.vehicle
     let carsArray = player.personalVehicles;

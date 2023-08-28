@@ -13,46 +13,46 @@ let exitAutosred = mp.colshapes.newSphere(-41.82459259033203, -1663.365966796875
         mp.keys.bind(0x45, true, function () {
         autoShowWindow();
         });
-        browser.execute("HUD.usebutton.active = true;");
+        global.browser.execute("HUD.usebutton.active = true;");
       }
       if(shape == exitAuto) {
         mp.keys.bind(0x45, true, function () {
         autoShowWindow();
         });
-        browser.execute("HUD.usebutton.active = true;");
+        global.browser.execute("HUD.usebutton.active = true;");
       }
 
       if (shape == enterAutosred) {
         mp.keys.bind(0x45, true, function () {
         sredJoin();
         });
-        browser.execute("HUD.usebutton.active = true;");
+        global.browser.execute("HUD.usebutton.active = true;");
       }
       if(shape == exitAutosred) {
         mp.keys.bind(0x45, true, function () {
         sredExit();
         });
-        browser.execute("HUD.usebutton.active = true;");
+        global.browser.execute("HUD.usebutton.active = true;");
       }
 
     })
 
     mp.events.add("playerExitColshape", (shape) => {
         if (shape == exitAuto) {
-          browser.execute("HUD.usebutton.active = false;");
+          global.browser.execute("HUD.usebutton.active = false;");
           mp.keys.unbind(0x45, true);
         }
         if (shape == enterAuto) {
-            browser.execute("HUD.usebutton.active = false;");
+          global.browser.execute("HUD.usebutton.active = false;");
             mp.keys.unbind(0x45, true);
         }
 
         if (shape == exitAutosred) {
-            browser.execute("HUD.usebutton.active = false;");
+          global.browser.execute("HUD.usebutton.active = false;");
             mp.keys.unbind(0x45, true);
           }
           if (shape == enterAutosred) {
-              browser.execute("HUD.usebutton.active = false;");
+            global.browser.execute("HUD.usebutton.active = false;");
               mp.keys.unbind(0x45, true);
           }
 
@@ -69,9 +69,9 @@ let exitAutosred = mp.colshapes.newSphere(-41.82459259033203, -1663.365966796875
   mp.events.add("AutoLuxeIn::CLIENT", () => {
     mp.events.callRemote("carLuxeTPJoin::SERVER");
 
-    browser.execute("Auto.active = false");
-    browser.execute("Auto.open = false");
-    browser.execute("Auto.modal.active = false");
+    global.browser.execute("Auto.active = false");
+    global.browser.execute("Auto.open = false");
+    global.browser.execute("Auto.modal.active = false");
     mp.gui.cursor.show(false, false);
     mp.game.ui.displayRadar(true);
     mp.events.call("HUD_setShow::CLIENT", true);
@@ -82,9 +82,9 @@ let exitAutosred = mp.colshapes.newSphere(-41.82459259033203, -1663.365966796875
   mp.events.add("AutoLuxeOut::CLIENT", () => {
     mp.events.callRemote("carLuxeTPExit::SERVER");
 
-    browser.execute("Auto.active = false");
-    browser.execute("Auto.open = false");
-    browser.execute("Auto.modal.active = false");
+    global.browser.execute("Auto.active = false");
+    global.browser.execute("Auto.open = false");
+    global.browser.execute("Auto.modal.active = false");
     mp.gui.cursor.show(false, false);
     mp.game.ui.displayRadar(true);
     mp.events.call("HUD_setShow::CLIENT", true);
@@ -92,26 +92,26 @@ let exitAutosred = mp.colshapes.newSphere(-41.82459259033203, -1663.365966796875
   });
 
 function autoShowWindow() {
-    browser.execute("Auto.active = true");
-    browser.execute("Auto.open = true");
-    browser.execute("Auto.modal.active = false");
+  global.browser.execute("Auto.active = true");
+  global.browser.execute("Auto.open = true");
+  global.browser.execute("Auto.modal.active = false");
     mp.gui.cursor.show(true, true);
     mp.game.ui.displayRadar(false);
     mp.events.call("HUD_setShow::CLIENT", false);
 }
 
 function autounShowWindow() {
-    browser.execute("Auto.active = false");
-    browser.execute("Auto.open = false");
-    browser.execute("Auto.modal.active = false");
+  global.browser.execute("Auto.active = false");
+  global.browser.execute("Auto.open = false");
+  global.browser.execute("Auto.modal.active = false");
     mp.gui.cursor.show(false, false);
     mp.game.ui.displayRadar(true);
     mp.events.call("HUD_setShow::CLIENT", true);
 }
 
 function autoShowWindowExit() {
-    browser.execute("Autounshow.active = true");
-    browser.execute("Autounshow.open = true");
+  global.browser.execute("Autounshow.active = true");
+  global.browser.execute("Autounshow.open = true");
     //browser.execute("Autounshow.modal.active = false");
     mp.gui.cursor.show(true, true);
     mp.game.ui.displayRadar(false);
@@ -119,27 +119,10 @@ function autoShowWindowExit() {
 }
 
 function autounShowWindowExit() {
-    browser.execute("Autounshow.active = false");
-    browser.execute("Autounshow.open = false");
-    browser.execute("Autounshow.modal.active = false");
+  global.browser.execute("Autounshow.active = false");
+  global.browser.execute("Autounshow.open = false");
+  global.browser.execute("Autounshow.modal.active = false");
     mp.gui.cursor.show(false, false);
     mp.game.ui.displayRadar(true);
     mp.events.call("HUD_setShow::CLIENT", true);
 }
-
-mp.events.add('render', () => {
-  if(mp.players.local.getVariable("render_info_cars") || false) {
-      mp.vehicles.forEachInStreamRange(
-          (veh) => {
-              var playerPos = mp.players.local.position
-              var vehDist = mp.game.gameplay.getDistanceBetweenCoords(playerPos.x, playerPos.y, playerPos.z, veh.position.x, veh.position.y, veh.position.z, true)
-              if(vehDist > 15) return // если дистанция > 15 то он не будет рендерить
-              mp.game.graphics.drawText(`ID ${veh.id} - MODEL: ${mp.game.vehicle.getDisplayNameFromVehicleModel(veh.getModel())}\nX: ${veh.position.x.toFixed(3)} Y: ${veh.position.y.toFixed(3)} Z: ${veh.position.z.toFixed(3)}`, [veh.position.x, veh.position.y, veh.position.z], {
-                  font: 4,
-                  color: [255, 255, 255, 185],
-                  scale: [0.5, 0.5]
-                });
-          }
-      )
-  }
-});
