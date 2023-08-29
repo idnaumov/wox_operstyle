@@ -55,6 +55,7 @@ mp.events.addCommand('aveh', (player, _, id, veh, color1, color2) => {
     var AdminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z));
     AdminVeh.setColor(parseInt(color1), parseInt(color2));
     target.putIntoVehicle(AdminVeh, 0)
+    AdminVeh.setVariable('fuel', 50)
 })
 
 mp.events.addCommand('setspeed', (player) => {
@@ -266,4 +267,15 @@ mp.events.addCommand('settempskin', (player, _, hash) => {
     if (hash == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /settempskin [skin hash]')
     chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}a_c_chimp')
     player.model = mp.joaat(hash)
+});
+
+mp.events.addCommand('setfuel', (player, _, fuel) => {
+    if(player.getVariable('adminlvl') < 3) return;
+    if (fuel == null) return chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Используйте /setfuel [liters]')
+
+    let veh = player.vehicle
+    if (veh) {
+        veh.setVariable('fuel', parseInt(fuel))
+        chat.send(player, '!{#BAFE2A}[Информация] !{#FFFFFF}Вы заправили авто на '+fuel+' литров')
+    }
 });

@@ -7,6 +7,8 @@ vehicleInfo.loadAll = function () {
 
     CONFIG.query('SELECT * FROM vehicles ORDER BY display_name ASC', [], async function (err, rows) {
         rows.forEach(function (item) {
+            item.model_joaat = mp.joaat(item.model);
+            console.log(item.model_joaat)
             enums.vehicleInfo.push(item);
         });
         console.log('[VEHICLES] Vehicle Info Loaded: ' + enums.vehicleInfo.length);

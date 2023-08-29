@@ -292,3 +292,16 @@ let simonIntID = mp.game.interior.getInteriorAtCoords(
   
   mp.game.interior.refreshInterior(simonIntID);
 
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function findRow(table, columnName, value) {
+    for (let i = 0; i < table.length; i++) {
+      if (table[i][columnName] === value) {
+        return table[i];
+      }
+    }
+    return null;
+  }
+

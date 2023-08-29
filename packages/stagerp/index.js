@@ -20,6 +20,7 @@ require('./events/basic/hud'); // Худ
 require('./events/basic/money'); // Деньги
 require('./events/basic/voice'); // Голосовой чат
 require('./events/basic/weaponcompsync'); // Оружия и их улучшения
+require('./events/basic/fuel'); // Система топлива
 
 // Бизнесы
 
@@ -149,6 +150,13 @@ mp.events.add('controlEngineState::SERVER', (player) => {
     let nowCar;
     let carOwner
     nowCar = carsArray.find(item => item.id === player.vehicle.getVariable('id'));
+
+    let fuel = veh.getVariable('fuel')
+    if (fuel <= 0) {
+        chat.addNotify(player, 2, "Нет бензина!", 4000)
+
+        return
+    }
    
     if ( veh && player.seat == 0 ) {
         if (nowCar || player.getVariable('adminlvl') > 1) {

@@ -432,6 +432,8 @@ async function loadVehicles(player) {
 
             player.personalVehiclesList[i].setColor(player.personalVehicles[i].color1, player.personalVehicles[i].color2)
             player.personalVehiclesList[i].setVariable('id', player.personalVehicles[i].id)
+            player.personalVehiclesList[i].setVariable('tank', player.personalVehicles[i].tank)
+            player.personalVehiclesList[i].setVariable('fuel', player.personalVehicles[i].fuel)
             player.setVariable(`personalVehicle${i}`, player.personalVehiclesList[i])
 
 

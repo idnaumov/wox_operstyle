@@ -6,7 +6,7 @@ mp.events.add('entityStreamIn', (entity) => {
 });
 
 let l_indicator = false
-mp.keys.bind(0x25, false, function () { // B key
+mp.keys.bind(0x25, false, function () { // <- key
     l_indicator = !l_indicator;
 
     var vehicle = player.vehicle;
@@ -14,7 +14,7 @@ mp.keys.bind(0x25, false, function () { // B key
 })
 
 let r_indicator = false
-mp.keys.bind(0x27, false, function () { // B key
+mp.keys.bind(0x27, false, function () { // -> key
     r_indicator = !r_indicator;
 
     var vehicle = player.vehicle;

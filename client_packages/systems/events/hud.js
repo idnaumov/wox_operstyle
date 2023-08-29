@@ -86,15 +86,17 @@ mp.events.add('render', () => {
         let speed = Math.round(parseInt(vel) * 3.6);
 
         let gear = vehicle.gear;
-        console.log(gear)
         if (vel == 0) {
             gear = 'N';
         } else if ( gear == 0 ) {
             gear = 'R';
         }
+
+        let fuel = vehicle.getVariable('fuel');
         
         browser.execute(`HUD.speedElements.speed = ${speed < 10 ? `'00${speed}'` : speed < 100 ? `'0${speed}'` : `'${speed}'`}`);
         browser.execute(`HUD.speedElements.gear = '${gear}'`)
+        browser.execute(`HUD.speedElements.fuel = '${fuel}'`)
         
         browser.execute(`HUD.carElements.engine = ${vehicle.getIsEngineRunning()}`)
         browser.execute(`HUD.carElements.seatbelt = ${!player.getConfigFlag(32, false)}`)
