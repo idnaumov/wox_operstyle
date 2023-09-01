@@ -652,7 +652,7 @@
             <div class="fuel">
                 <span class="speedmask">КМ/Ч</span>
                 <div class="fueltext">
-                    <span>{{speedElements.fuel}} л.</span><img src="./systems/Hud/img/fuel.svg" alt="">
+                    <span>{{speedElements.fuel}} / {{speedElements.tank}} л.</span><img src="./systems/Hud/img/fuel.svg" alt="">
                 </div>
             </div>
         </div>
@@ -1927,6 +1927,49 @@
             </div>
         </div>
     </div>
+    <div id="fuelStation" v-show="active" v-cloak>
+        <div class="fuelStation_wrapper">
+            <div class="selectType">
+                <div class="fuelType_wrapper" v-for="(item,i) in veh_fuelType">
+                    <div class="fuelType" @click="selectedFuel = i, selectFuelType(i)" :class="{ active: i === selectedFuel }">
+                        <span class="type">{{item.name}}</span>
+                        <span class="price">${{item.price}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fuel_scrollbar">
+                <div class="scrollbar_desc">
+                    <span class="desc">Кол-во литров</span>
+                    <span class="liters">{{fuelValue}} л</span>
+                </div>
+                <div class="scrollbar">
+                    <input type="range" name="fuel_liters" id="fuelRange" min="0" :max="tank" step="1" v-model="fuelValue" v-on:input="selectFuelType">
+                </div>
+            </div>
+        </div>
+        <div class="oplata_wrapper">
+            <div class="name">
+                <img src="./systems/fuelStation/dist/fire.svg" alt="">
+                <h1>Оплата</h1>
+            </div>
+            <div class="price_liter">
+                <span class="price_desc">Цена за литр</span>
+                <span class="price">${{literPrice}}</span>
+            </div>
+            <div class="itog_liters">
+                <span class="price_desc">Итого</span>
+                <span class="price">${{allPrice}}</span>
+            </div>
+            <div class="btn_payment">
+                <div class="card_payment" @click="buyFuel('card')">
+                    Карта
+                </div>
+                <div class="nal_payment" @click="buyFuel('nal')">
+                    Наличные
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -1972,6 +2015,9 @@
 
 <!-- Автошкола -->
 <script src="./systems/autoschool/autoschool.js"></script>
+
+<!-- АЗС -->
+<script src="./systems/fuelStation/main.js"></script>
 
 <!-- Работы -->
 <script src="./systems/jobs/farm/farm.js"></script>

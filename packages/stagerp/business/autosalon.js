@@ -1,5 +1,6 @@
 
 let chat = require('../events/basic/hud');
+let fuelInfo = require('../events/basic/fuel')
 
 const heading = require('../index.js');
 
@@ -171,7 +172,6 @@ mp.events.add('lockCar::SERVER', (player, vehicle) => {
 
         let newState = !vehicle.locked;
         vehicle.locked = newState;
-        console.log(newState);
         if(newState) {
             player.call('sendToCarUved::CLIENT', [true]);
         }else{
@@ -239,7 +239,6 @@ mp.events.add('Autosalon_buyVehicle::SERVER', async (player, t, model, price, co
 
         await DB.query('SELECT * FROM vehicles WHERE login = ?', [player.login], async function (err, r) {
             if (err) return console.log(err)
-            console.log(r)
             player.personalVehicles = r;
             player.personalVehiclesCount = r.length;
     
@@ -249,14 +248,21 @@ mp.events.add('Autosalon_buyVehicle::SERVER', async (player, t, model, price, co
                 let rot = JSON.parse(player.personalVehicles[i].rot);
                 let color1 = JSON.parse(player.personalVehicles[i].color1);
                 let color2 = JSON.parse(player.personalVehicles[i].color2);
+                let fuel = JSON.parse(player.personalVehicles[i].fuel);
                 if(player.personalVehicles[i].model == model) {
                 player.personalVehiclesList[i] = mp.vehicles.new(mp.joaat(player.personalVehicles[i].model), new mp.Vector3(parseFloat(pos.x), parseFloat(pos.y), parseFloat(pos.z)), {
                     dimension: 0,
                     numberPlate: generateRandomNumberPlate(),
                     color: [color1, color2]           
                 })
+
+                let tank = await fuelInfo.getCarTank(player.personalVehiclesList[i].model);
+    
+                player.personalVehiclesList[i].setVariable('tank', tank)
+                player.personalVehiclesList[i].setVariable('fuel', fuel)
     
                 //player.personalVehiclesList[i].setColor(player.personalVehicles[i].color1, player.personalVehicles[i].color2)
+
                 player.personalVehiclesList[i].setVariable('id', player.personalVehicles[i].id)
                 player.setVariable(`personalVehicle${i}`, player.personalVehiclesList[i])
     
@@ -280,8 +286,6 @@ mp.events.add('Autosalon_buyVehicle::SERVER', async (player, t, model, price, co
                 parsedItems.push(invTemp);
                 
                 toInv = JSON.stringify(parsedItems);
-                
-                console.log(toInv);
                 
                 DB.query('UPDATE characters SET items = ? WHERE login = ?', [toInv, player.login], function (err, r) {
                     if (err) return console.log(err)
@@ -342,7 +346,6 @@ mp.events.addCommand('park', (player) => {
 
 mp.events.add('console_log', (player, obj) => {
     console.log(obj)
-    console.log('from client')
 })
 
 mp.events.add('TOWTRUCK::SERVER', (player, carArray) => {
@@ -373,20 +376,20 @@ async function towtruckVehicle(player, carObject) {
     let vehicle = JSON.parse(carObject);
 
     try {
-    player.personalVehiclesList[carObj.selectedId].destroy();
-    //player.personalVehiclesList = player.personalVehiclesList.splice(carObj.selectedId, 1);
+        player.personalVehiclesList[carObj.selectedId].destroy();
     }catch(e) {
-        console.log(e)
+        // console.log(e)
     }   
     player.setVariable('towtrucks', player.getVariable('towtrucks') + 1)
     chat.addNotify(player, 1, `Вы эвакуировали машину за 100$`, 7000);
 
-    DB.query('SELECT * FROM vehicles WHERE id = ?', [carObj.id], function (err, r) {
+    DB.query('SELECT * FROM vehicles WHERE id = ?', [carObj.id], async function (err, r) {
 
             let pos = JSON.parse(r[0].parkpos);
             let rot = JSON.parse(r[0].parkrot);
             let color1 = JSON.parse(r[0].color1);
             let color2 = JSON.parse(r[0].color2);
+            let fuel = JSON.parse(r[0].fuel) || 50;
 
             player.personalVehiclesList[carObj.selectedId] = mp.vehicles.new(mp.joaat(r[0].model), new mp.Vector3(parseFloat(pos.x), parseFloat(pos.y), parseFloat(pos.z)), {
                 heading: rot.z,
@@ -395,14 +398,27 @@ async function towtruckVehicle(player, carObject) {
                 color: [color1, color2]           
             })
 
+            let tank = await fuelInfo.getCarTank(player.personalVehicles[carObj.selectedId].model);
+
+            player.personalVehiclesList[carObj.selectedId].setVariable('tank', tank)
+            player.personalVehiclesList[carObj.selectedId].setVariable('fuel', fuel)
+
             player.personalVehiclesList[carObj.selectedId].setVariable('id', player.personalVehicles[carObj.selectedId].id)
             player.setVariable(`personalVehicle${carObj.selectedId}`, player.personalVehiclesList[carObj.selectedId])
 
             player.personalVehiclesList[carObj.selectedId].setVariable('id', r[0].id)
 
             if(r[0].loaded == 0) {
-            return;
-        }
+                // let fuel = JSON.parse(r[0].fuel) || 50;
+                // let tank = fuelInfo.getCarTank(player.personalVehiclesList[i].model);
+
+                // console.log(tank, fuel)
+
+                // player.personalVehiclesList[carObj.selectedId].setVariable('tank', tank)
+                // player.personalVehiclesList[carObj.selectedId].setVariable('fuel', fuel)
+
+                return;
+            }
     
         })
         
@@ -422,6 +438,7 @@ async function loadVehicles(player) {
             let rot = JSON.parse(player.personalVehicles[i].rot);
             let color1 = JSON.parse(player.personalVehicles[i].color1);
             let color2 = JSON.parse(player.personalVehicles[i].color2);
+            let fuel = JSON.parse(player.personalVehicles[i].fuel);
             if(player.personalVehicles[i].loaded == 0) {
             player.personalVehiclesList[i] = mp.vehicles.new(mp.joaat(player.personalVehicles[i].model), new mp.Vector3(parseFloat(pos.x), parseFloat(pos.y), parseFloat(pos.z)), {
                 heading: rot.z,
@@ -430,10 +447,13 @@ async function loadVehicles(player) {
                 color: [color1, color2]           
             })
 
+            let tank = fuelInfo.getCarTank(player.personalVehiclesList[i].model);
+
+            player.personalVehiclesList[i].setVariable('tank', player.personalVehicles[i].tank)
+            player.personalVehiclesList[i].setVariable('fuel', fuel)
+
             player.personalVehiclesList[i].setColor(player.personalVehicles[i].color1, player.personalVehicles[i].color2)
             player.personalVehiclesList[i].setVariable('id', player.personalVehicles[i].id)
-            player.personalVehiclesList[i].setVariable('tank', player.personalVehicles[i].tank)
-            player.personalVehiclesList[i].setVariable('fuel', player.personalVehicles[i].fuel)
             player.setVariable(`personalVehicle${i}`, player.personalVehiclesList[i])
 
 
@@ -452,6 +472,20 @@ async function loadVehicles(player) {
         
     })
 
+}
+
+exports.refuelCar = async function (veh) {
+    if (!veh) return
+
+    let id = veh.getVariable('id');
+    if (!id) return
+
+    let fuel = veh.getVariable('fuel') || veh.getVariable('tank') || 100
+
+    DB.query('UPDATE vehicles SET fuel = ? WHERE id = ?', [fuel, id], function (err, r) {
+        if (err) return console.log(err)
+        console.log('Авто заправлено ID:' + id)
+    })
 }
 
 mp.events.add('playerQuit', (player) => {

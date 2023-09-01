@@ -1,0 +1,261 @@
+// body {
+//     background: url('../dist/bg.png') no-repeat;
+//     background-size: cover;
+// }
+
+#fuelStation {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    animation: showFuel .6s linear;
+}
+
+.fuelStation_wrapper {
+    padding: 37px 34px;
+
+    // width: 537px;
+    max-height: 228px;
+    min-height: 228px;
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 10px 0px 0px 10px;
+
+    background: rgba(34, 35, 55, 0.70);
+}
+
+.selectType {
+    display: flex;
+    gap: 40px
+}
+
+.oplata_wrapper {
+    // width: 243px;
+    max-height: 238px;
+    min-height: 238px;
+    background: rgba(66, 69, 101, 0.7);
+
+    padding: 50px 14px 14px 10px;
+
+    border-radius: 0px 10px 10px 0px;
+}
+
+.fuelType_wrapper {
+    display: flex;
+
+    .fuelType {
+        width: 130px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        background: url('../dist/fuel_panel.svg');
+
+        &.active {
+            background: url('../dist/fuel_panel_selected.svg');
+        }
+
+        .type {
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 38px;
+            font-style: normal;
+            font-weight: 900;
+            line-height: normal;
+        }
+
+        .price {
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+}
+
+.fuel_scrollbar {
+    margin-top: 26px;
+    padding: 8px 11px 9px 11px;
+
+    border-radius: 8px;
+
+    //width: 100%;
+    //height: 50px;
+
+    background: rgba($color: #2F314C, $alpha: 0.7);
+
+    .scrollbar_desc {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .liters,
+    .desc {
+        color: #FFF;
+        font-family: Gilroy;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .scrollbar input {
+        width: 100%;
+    }
+}
+
+.oplata_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    background: url('../dist/oplata_panel.svg') no-repeat;
+    background-size: cover;
+
+    .name {
+
+        display: flex;
+        gap: 7px;
+        
+        h1 {
+            color: #F9D371;
+            font-family: Gilroy;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+    }
+
+    .price_liter {
+        margin-top: 6px;
+        width: 213px;
+
+        display: flex;
+        justify-content: space-between;
+        
+        padding: 14px 16px;
+        background: rgba($color: #F9D371, $alpha: 0.7);
+        border-radius: 10px;
+
+        .price_desc {
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .price {
+            color: #FFF;
+            text-align: right;
+            font-family: Gilroy;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+
+    .itog_liters {
+        margin-top: 13px;
+        width: 213px;
+
+        display: flex;
+        justify-content: space-between;
+        
+        padding: 14px 16px;
+        background: rgba($color: #F9D371, $alpha: 0.7);
+        border-radius: 10px;
+
+        .price_desc {
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+        }
+
+        .price {
+            color: #FFF;
+            text-align: right;
+            font-family: Gilroy;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+
+    .btn_payment {
+        margin-top: 46px;
+
+        display: flex;
+        gap: 10px;
+    }
+
+    .card_payment,
+    .nal_payment {
+        padding: 16px 30px;
+        border-radius: 10px;
+        background: rgba(228, 30, 107, 0.50);
+        color: #fff;
+
+        font-family: Gilroy;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+
+        &:hover {
+            box-shadow: 0px 0px 10px 2px rgba(228, 30, 107, 0.30);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+@keyframes showFuel {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// PIZDA
+input[type='range']::-webkit-slider-thumb {
+    background: rgba(193, 24, 90, 1);
+    height: 20px;
+    width: 20px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+}
+
+input[type='range'] {
+    border-radius: 8px;
+    accent-color: #E41E6B;
+    height: 6px;
+}

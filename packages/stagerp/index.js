@@ -20,7 +20,7 @@ require('./events/basic/hud'); // Худ
 require('./events/basic/money'); // Деньги
 require('./events/basic/voice'); // Голосовой чат
 require('./events/basic/weaponcompsync'); // Оружия и их улучшения
-require('./events/basic/fuel'); // Система топлива
+let fuelInfo = require('./events/basic/fuel'); // Система топлива
 
 // Бизнесы
 
@@ -67,7 +67,8 @@ function init() {
         else 
         {
             console.log('INIT GAMEMODE');
-            vehicleInfo.loadAll();
+            vehicleInfo.loadAll(); // подгружаем таблицу машин
+            fuelInfo.loadAll(); // создаем колшейпы заправок
         }
     } 
     catch (e) {

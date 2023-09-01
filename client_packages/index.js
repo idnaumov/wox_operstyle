@@ -14,6 +14,7 @@ require('./systems/events/weaponcompsync');
 require('./systems/events/houses');
 require('./systems/events/menu');
 require('./systems/events/rent');
+require('./systems/events/fuel');
 // 
 require('./systems/utils/3dCamera');
 require('./systems/utils/snake');
@@ -48,6 +49,7 @@ require('./systems/utils/death');
 require('./systems/utils/zones');
 require('./systems/utils/ultrawide');
 require('./systems/utils/bigmap');
+require('./systems/instructional_buttons');
 
 global.browser = mp.browsers.new('package://browser/index.html');
 global.player = mp.players.local;

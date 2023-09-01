@@ -93,10 +93,12 @@ mp.events.add('render', () => {
         }
 
         let fuel = vehicle.getVariable('fuel');
+        let tank = vehicle.getVariable('tank');
         
         browser.execute(`HUD.speedElements.speed = ${speed < 10 ? `'00${speed}'` : speed < 100 ? `'0${speed}'` : `'${speed}'`}`);
         browser.execute(`HUD.speedElements.gear = '${gear}'`)
-        browser.execute(`HUD.speedElements.fuel = '${fuel}'`)
+        browser.execute(`HUD.speedElements.fuel = '${Math.round(fuel)}'`)
+        browser.execute(`HUD.speedElements.tank = '${Math.round(tank)}'`)
         
         browser.execute(`HUD.carElements.engine = ${vehicle.getIsEngineRunning()}`)
         browser.execute(`HUD.carElements.seatbelt = ${!player.getConfigFlag(32, false)}`)

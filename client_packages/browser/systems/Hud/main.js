@@ -57,7 +57,8 @@ var HUD = new Vue({
         speedElements: {
             speed: '000',
             gear: "N",
-            fuel: 5
+            fuel: 5,
+            tank: 10
         }
     },
     methods: {
