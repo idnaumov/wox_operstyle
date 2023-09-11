@@ -82,14 +82,25 @@ mp.events.add('GPSCAR::CLIENT', (carArray) => {
 
 })
 
+let carShow = false
+
 mp.events.add('cars_show::CLIENT', (carArray) => {
     mp.gui.cursor.show(true, true);
     let carArr = JSON.parse(carArray);
-    mp.events.call('HUD_setShow::CLIENT', false)
+    //mp.events.call('HUD_setShow::CLIENT', false)
     //browser.execute(`cars.updateCars(${carArr})`)
     //browser.execute(`cars.active = 'true'`)
     browser.call('cars_show::CEF', carArr);
+    carShow = true
+    mp.keys.bind(0x1b, false, closeCarWindow)
 })
+
+function closeCarWindow() {
+    if (!carShow) return
+    browser.call('cars_hide::CEF');
+    carShow = false
+    mp.gui.cursor.show(false, false);
+}
 
 mp.events.add('sendToCarUved::CLIENT', (bool) => {
     browser.call('miniuvedi::CEF', bool);
@@ -180,7 +191,6 @@ mp.events.add('Autosalon_successBuy::CLIENT', () => {
     mp.events.call('HUD_setShow::CLIENT', true)
     opened = false;
     camera.destroy();
-    previewVehicle.destroy();
     mp.game.cam.renderScriptCams(false, true, 0, true, false);
     mp.events.callRemote('Autosalon_exit::SERVER')
 })
@@ -203,7 +213,9 @@ mp.events.add('render', () => {
             mp.gui.cursor.show(false, false);
             mp.game.ui.displayRadar(true);
             mp.events.call('HUD_setShow::CLIENT', true)
-            previewVehicle.destroy();
+            if (!previewVehicle == 0) {
+                previewVehicle.destroy();
+            }
             mp.events.callRemote('Autosalon_exit::SERVER')
         }
     }

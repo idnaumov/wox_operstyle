@@ -11,7 +11,7 @@
     <div id="auth" v-show="active" v-cloak>
         <!-- <img src="./systems/auth/img/bg.png" class="bg_1" v-show="state == 1">
         <img src="./systems/auth/img/bg2.png" class="bg_1" v-show="state == 2"> -->
-        <transition name="fade">
+        <!-- <transition name="fade">
             <div class="login_wrapper" v-show="state == 1">
                 <div class="form_login">
                     <h1>Авторизация</h1>
@@ -81,7 +81,107 @@
                     <div class="error">{{ error.text }}</div>
                 </div>
             </div>
-        </transition>
+        </transition> -->
+        <div class="auth_wrapper">
+            <img src="./systems/auth/img/logo.svg" alt="" class="logo__img">
+            <div class="right_side">
+                <ul class="benefit__list">
+                    <li class="benefit_item">
+                        <span class="benefit_name">
+                            УНИКАЛЬНЫЙ МОД
+                        </span>
+                        <span class="benefit_desc">
+                            Наша команда очень постаралась, чтобы игра на
+                            сервере была комфортной, свободной и самое
+                            главное честной! Стабильность - вот залог успеха.
+                        </span>
+                    </li>
+                    <li class="benefit_item">
+                        <span class="benefit_name">
+                            ТЕМАТИКА СЕРВЕРА - RPG!
+                        </span>
+                        <span class="benefit_desc">
+                            Наша команда очень постаралась, чтобы игра на
+                            сервере была комфортной, свободной и самое
+                            главное честной! Стабильность - вот залог успеха.
+                        </span>
+                    </li>
+                    <li class="benefit_item">
+                        <span class="benefit_name">
+                            УНИКАЛЬНЫЙ МОД
+                        </span>
+                        <span class="benefit_desc">
+                            Наша команда очень постаралась, чтобы игра на
+                            сервере была комфортной, свободной и самое
+                            главное честной! Стабильность - вот залог успеха.
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <div class="left_side">
+                <div class="auth__wrapper" v-if="state == 1">
+                    <img src="./systems/auth/img/arrow.svg" alt="" class="arrow_auth">
+                    <div class="auth_text">
+                        <h1>Выполните вход в аккаунт</h1>
+                        <h2>С <span class="pink">возвращением!</span></h2>
+                    </div>
+                    <div class="input">
+                        <input type="text" v-model="Login.login" placeholder="Введите логин">
+                    </div>
+                    <div class="input">
+                        <input type="password" v-model="Login.password" placeholder="Введите пароль">
+                    </div>
+
+                    <!-- КНОПКА ЗАРЕГАТЬСЯ И ЗАБЫЛ ПАРОЛЬ -->
+                    <div class="text">
+                        <div class="text-btn" @click="setState(2)">
+                            <span>Зарегистрироваться</span>
+                        </div>
+                        <div class="text-btn">
+                            <span>Забыли пароль?</span>
+                        </div>
+                    </div>
+
+                    <div class="btn" @click="loginBtn()">
+                        <img src="./systems/auth/img/btn_bg.svg" alt="" class="btn_bg">
+                        <span>Войти</span>
+                    </div>
+
+                    <div class="error_text" v-if="error.text">
+                        <span>{{error.text}}</span>
+                    </div>
+                </div>
+                <div class="auth__wrapper" v-if="state == 2">
+                    <img src="./systems/auth/img/arrow.svg" alt="" class="arrow_auth">
+                    <div class="auth_text">
+                        <h1 class="test">Регистрация аккаунта</h1>
+                        <h2>Уже есть аккаунт? <span class="pink" @click="setState(1)">Войти</span></h2>
+                    </div>
+                    <div class="input">
+                        <input type="text" v-model="Register.login" placeholder="Введите логин">
+                    </div>
+                    <div class="input">
+                        <input type="text" v-model="Register.password" placeholder="Введите пароль">
+                    </div>
+                    <div class="input">
+                        <input type="text" v-model="Register.rpassword" placeholder="Повторите пароль">
+                    </div>
+                    <div class="input">
+                        <input type="text" v-model="Register.email" placeholder="Email адрес">
+                    </div>
+
+                    <!-- КНОПКА ЗАРЕГАТЬСЯ И ЗАБЫЛ ПАРОЛЬ -->
+                    <span class="text_rules">Внимание! Регистрируясь Вы соглашаетесь со всеми правиламинашего проекта!<span class="text_rules pink">(Открыть правила в браузере)</span></span>
+
+                    <div class="btn test" @click="loginBtn()">
+                        <img src="./systems/auth/img/btn_bg.svg" alt="" class="btn_bg">
+                        <span>Зарегистрироваться</span>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
     </div>
     <!-- Создание персонажа -->
     <div id="pedCreator" v-show="active" v-cloak>
@@ -1927,6 +2027,7 @@
             </div>
         </div>
     </div>
+    <!-- Заправка / АЗС -->
     <div id="fuelStation" v-show="active" v-cloak>
         <div class="fuelStation_wrapper">
             <div class="selectType">
@@ -1970,6 +2071,47 @@
             </div>
         </div>
     </div>
+    <!-- F3 / Система авто -->
+    <div id="carGarage" v-show="active" v-cloak>
+        <div class="garage_wrapper_left">
+            <div class="car_type">
+                <span class="slider active">Все машины</span>
+                <span class="slider">Избранные машины</span>
+            </div>
+            <ul class="car_list">
+                <li class="car_item" v-for="(item,i) in vehList" @click="selectedVeh = i" :class="{ active: i === selectedVeh }">
+                    <div class="carName">
+                        <span class="name">{{item.name}}</span>
+                        <span class="model">{{item.model}}</span>
+                    </div>
+                    <div class="right">
+                        <div class="car-number">
+                            <span>{{item.number}}</span>
+                        </div>
+                        <img src="./systems/carGarage/img/star_on.svg" v-show="item.isFavorite">
+                        <img src="./systems/carGarage/img/star_off.svg" v-show="!item.isFavorite">
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="garage_wrapper_right">
+            <div class="right_buttons">
+                <span class="button__garage" @click="setMarkerToVeh()">Установить метку на авто</span>
+                <span class="button__garage" @click="setVehLocked()">Открыть/Закрыть авто</span>
+                <span class="button__garage" @click="deleteVeh()">Убрать авто</span>
+                <span class="button__garage" @click="respawnVeh()">Доставить к себе</span>
+                <span class="button__garage purple" @click="sellVehicle()">Продать автомобиль</span>
+            </div>
+            <div class="garage-slots">
+                <span>Информация о гаражных местах:</span>
+                <div class="slots-wrapper">
+                    <span>Свободно: <b>10</b></span>
+                    <span>Всего: <b>50</b></span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -2001,6 +2143,9 @@
 
 <!-- Автосалон -->
 <script src="./systems/Autosalon/autosalon.js"></script>
+
+<!-- Система гаража -->
+<script src="./systems/carGarage/main.js"></script>
 
 <!-- Автосалон заход -->
 <script src="./systems/auto/auto.js"></script>

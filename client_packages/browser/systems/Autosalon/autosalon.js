@@ -143,11 +143,11 @@ var Autosalon = new Vue({
             this.open = false;
             this.buyedWindow = true;
             var $this = this;
-            setTimeout(function () {
+            //setTimeout(function () {
                 $this.open = true;
                 $this.buyedWindow = false;
                 mp.trigger('Autosalon_successBuy::CLIENT')
-            }, 5000)
+            //}, 5000)
         },
         formatNumber(x) {
             if (x == null) return;

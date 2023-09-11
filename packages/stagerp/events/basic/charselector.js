@@ -40,7 +40,7 @@ mp.events.add("loadCharacter::SERVER", (player) => {
           }
         );
 
-        chat.send(player, `!{#FFFFFF}${translations.chat_welcome}!{#FFFFFF} ${translations.chat_stage}!{#9AD450} 0.0.19dev`);
+        chat.send(player, `!{#FFFFFF}${translations.chat_welcome}!{#FFFFFF} ${translations.chat_stage}!{#9AD450} 0.0.20dev`);
         chat.addNotify(player, 1, `${translations.chat_player} ${player.name}`, 7000);
         if (player.getVariable("adminlvl") >= 1) {
           chat.send(

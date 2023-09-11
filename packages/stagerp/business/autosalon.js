@@ -4,15 +4,39 @@ let fuelInfo = require('../events/basic/fuel')
 
 const heading = require('../index.js');
 
+// function generateRandomNumberPlate() {
+//     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Доступные символы для номерных знаков
+//     let plate = '';
+//     for (let i = 0; i < 6; i++) {
+//         const randomIndex = Math.floor(Math.random() * characters.length);
+//         plate += characters[randomIndex];
+//     }
+//     return plate;
+// }
+
 function generateRandomNumberPlate() {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Доступные символы для номерных знаков
-    let plate = '';
-    for (let i = 0; i < 6; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        plate += characters[randomIndex];
-    }
-    return plate;
+    const licCh = ["A", "B", "C", "E", "T", "Y", "O", "P", "H", "K", "X", "M"];
+    let newPlate;
+    do {
+        newPlate = `${licCh[Math.floor(Math.random() * licCh.length)]}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}${licCh[Math.floor(Math.random() * licCh.length)]}${licCh[Math.floor(Math.random() * licCh.length)]}${Math.floor(Math.random() * 10)}${Math.floor(Math.random() * 10)}`;
+    } while (!checkNomerExistance(newPlate));
+  
+    console.log(newPlate)
+    return newPlate;
 }
+
+async function checkNomerExistance(newPlate) {
+    
+    DB.query('SELECT number FROM vehicles WHERE number = ?', [newPlate], async function (err, r) {
+        if (r && r.length > 0) {
+            return true
+        } else {
+            return false
+        }
+    })
+}
+
+generateRandomNumberPlate()
 
 var salons = [
     {
@@ -61,16 +85,16 @@ var salons = [
         scale: 0.9,
         blipColor: 83,
         vehicles: [
-            { name: 'Sheava', price: 350000, model: 'sheava' },
-            { name: 'Tyrant', price: 400000, model: 'tyrant' },
-            { name: 'Entityxf', price: 200000, model: 'entityxf' },
-            { name: 'Banshee', price: 200000, model: 'banshee2' },
-            { name: 'Zentorno', price: 800000, model: 'zentorno' },
-            { name: 'Prototipo', price: 800000, model: 'prototipo' },
-            { name: 'T20', price: 750000, model: 't20' },
-            { name: 'GT63SAMG', price: 1500000, model: 'gt63samg' },
-            { name: 'Huracan', price: 2500000, model: 'huracan' },
-            { name: 'Laferrari', price: 2500000, model: 'laferrari' },
+            { name: 'RUNE 2170 Priora', price: 350000, model: 'apriora' },
+            // { name: 'Tyrant', price: 400000, model: 'tyrant' },
+            // { name: 'Entityxf', price: 200000, model: 'entityxf' },
+            // { name: 'Banshee', price: 200000, model: 'banshee2' },
+            // { name: 'Zentorno', price: 800000, model: 'zentorno' },
+            // { name: 'Prototipo', price: 800000, model: 'prototipo' },
+            // { name: 'T20', price: 750000, model: 't20' },
+            // { name: 'GT63SAMG', price: 1500000, model: 'gt63samg' },
+            // { name: 'Huracan', price: 2500000, model: 'huracan' },
+            // { name: 'Laferrari', price: 2500000, model: 'laferrari' },
         ],
         standVehicle: new mp.Vector3(-783.6351318359375, -224.0694122314453, 36.968379974365234),
         testDrive: new mp.Vector3(-768.3637084960938, -245.3536376953125, 37.24693298339844),
@@ -174,8 +198,10 @@ mp.events.add('lockCar::SERVER', (player, vehicle) => {
         vehicle.locked = newState;
         if(newState) {
             player.call('sendToCarUved::CLIENT', [true]);
+            chat.addNotify(player, 1, `Вы закрыли авто.`, 7000);
         }else{
             player.call('sendToCarUved::CLIENT', [false]);
+            chat.addNotify(player, 1, `Вы открыли авто.`, 7000);
         }
 })
 
@@ -231,7 +257,9 @@ mp.events.add('Autosalon_buyVehicle::SERVER', async (player, t, model, price, co
         }
 })
 
-    DB.query('INSERT INTO vehicles (login,items,model,pos,rot,parkpos,parkrot,color1,color2) VALUES(?,?,?,?,?,?,?,?,?)', [player.login, '[{}]', model, JSON.stringify(salons[player.getVariable('currentAutosalon')].testDrive), '{"x":0,"y":0,"z":0}', JSON.stringify(salons[player.getVariable('currentAutosalon')].testDrive), '{"x":0,"y":0,"z":0}', color1, color2], function (err, r) {
+    let number = generateRandomNumberPlate()
+
+    DB.query('INSERT INTO vehicles (login,items,model,pos,rot,parkpos,parkrot,color1,color2,number) VALUES(?,?,?,?,?,?,?,?,?,?)', [player.login, '[{}]', model, JSON.stringify(salons[player.getVariable('currentAutosalon')].testDrive), '{"x":0,"y":0,"z":0}', JSON.stringify(salons[player.getVariable('currentAutosalon')].testDrive), '{"x":0,"y":0,"z":0}', color1, color2, number], function (err, r) {
         if (err) return console.log(err)
     })
 
@@ -241,18 +269,21 @@ mp.events.add('Autosalon_buyVehicle::SERVER', async (player, t, model, price, co
             if (err) return console.log(err)
             player.personalVehicles = r;
             player.personalVehiclesCount = r.length;
+            let i = player.personalVehiclesCount-1
     
     
-            for (let i = 0; i < player.personalVehiclesCount; i++) {
+            // for (let i = 0; i < player.personalVehiclesCount; i++) {
                 let pos = JSON.parse(player.personalVehicles[i].pos);
                 let rot = JSON.parse(player.personalVehicles[i].rot);
                 let color1 = JSON.parse(player.personalVehicles[i].color1);
                 let color2 = JSON.parse(player.personalVehicles[i].color2);
-                let fuel = JSON.parse(player.personalVehicles[i].fuel);
+                let fuel = player.personalVehicles[i].fuel;
+                let number = player.personalVehicles[i].number;
+
                 if(player.personalVehicles[i].model == model) {
                 player.personalVehiclesList[i] = mp.vehicles.new(mp.joaat(player.personalVehicles[i].model), new mp.Vector3(parseFloat(pos.x), parseFloat(pos.y), parseFloat(pos.z)), {
                     dimension: 0,
-                    numberPlate: generateRandomNumberPlate(),
+                    numberPlate: number,
                     color: [color1, color2]           
                 })
 
@@ -294,7 +325,7 @@ mp.events.add('Autosalon_buyVehicle::SERVER', async (player, t, model, price, co
 
               
 
-        }
+        //}
             }
         
             
@@ -312,11 +343,8 @@ mp.events.add('playerJoined', (player) => {
 })
 
 mp.events.addCommand('cars', (player) => {
-
-let carsArray = player.personalVehicles;
-
-player.call('cars_show::CLIENT', [JSON.stringify(carsArray)])
-
+    let carsArray = player.personalVehicles;
+    player.call('cars_show::CLIENT', [JSON.stringify(carsArray)])
 })
 
 mp.events.addCommand('park', (player) => {
@@ -385,16 +413,23 @@ async function towtruckVehicle(player, carObject) {
 
     DB.query('SELECT * FROM vehicles WHERE id = ?', [carObj.id], async function (err, r) {
 
-            let pos = JSON.parse(r[0].parkpos);
+            // let pos = JSON.parse(r[0].parkpos);
+            let pos = player.position
             let rot = JSON.parse(r[0].parkrot);
             let color1 = JSON.parse(r[0].color1);
             let color2 = JSON.parse(r[0].color2);
-            let fuel = JSON.parse(r[0].fuel) || 50;
+            let fuel = r[0].fuel || 50;
+            let number = r[0].number;
 
-            player.personalVehiclesList[carObj.selectedId] = mp.vehicles.new(mp.joaat(r[0].model), new mp.Vector3(parseFloat(pos.x), parseFloat(pos.y), parseFloat(pos.z)), {
-                heading: rot.z,
+            let rotate = player.heading;
+            let rotZ = degToRad(rotate)
+            let x = pos.x + 1.5 * Math.cos(rotZ)
+            let y = pos.y + 1.5 * Math.sin(rotZ)
+
+            player.personalVehiclesList[carObj.selectedId] = mp.vehicles.new(mp.joaat(r[0].model), new mp.Vector3(parseFloat(x), parseFloat(y), parseFloat(pos.z)), {
+                heading: rotate,
                 dimension: player.dimension,
-                numberPlate: generateRandomNumberPlate(),
+                numberPlate: number,
                 color: [color1, color2]           
             })
 
@@ -424,6 +459,11 @@ async function towtruckVehicle(player, carObject) {
         
 
 }
+
+function degToRad(degrees) {
+    return degrees * (Math.PI / 180);
+}
+  
 
 async function loadVehicles(player) {
     player.personalVehiclesList = [];

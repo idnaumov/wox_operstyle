@@ -1,0 +1,219 @@
+#carGarage {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .garage_wrapper_left {
+        min-height: 397px;
+        border-radius: 10px 0 0 10px;
+        padding: 16px;
+        background: rgba($color: #222337, $alpha: .7);
+
+        .car_type {
+            display: flex;
+
+            background: rgba($color: #F9D371, $alpha: .2);
+            border-radius: 54px;
+            height: 41px;
+            .slider {
+                color: #FFF;
+                font-family: Gilroy;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 205px;
+
+                
+
+
+                &.active {
+                    background: #F9D371;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    width: 205px;
+                    height: 41px;
+                    border-radius: 54px;
+                }
+            }
+        }
+
+        .car_list {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 320px;
+            min-height: 320px;
+            overflow-y: scroll;
+
+              
+
+            .car_item {
+                margin-right: 6px;
+                display: flex;
+                justify-content: space-between;
+                border-radius: 10px;
+                padding: 11px 13px;
+                background: rgba($color: #3b3d5f, $alpha: .8);
+
+                &.active {
+                    background: rgba($color: #2F314C, $alpha: .8);
+                }
+                &:hover {
+                    background: rgba($color: #2F314C, $alpha: .8);
+                }
+
+                .right {
+                    gap: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+
+                .carName {
+                    display: flex;
+                    flex-direction: column;
+
+                    .name {
+                        color: #FFF;
+                        font-family: Gilroy;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: normal;
+                    }
+
+                    .model {
+                        color: #FFF;
+                        font-family: Gilroy;
+                        font-size: 14px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+                        opacity: 0.7;
+                    }
+                }
+
+                .car-number {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 8px 16px;
+
+                    border-radius: 38px;
+                    background:rgba($color: #FFFFFF, $alpha: .2);
+
+                    color: #FFF;
+                    font-family: Gilroy;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+            }
+        }
+    }   
+
+    .garage_wrapper_right {
+        min-height: 395px;
+        border-radius: 0 10px 10px 0;
+        padding: 16px;
+        background: rgba($color: #222337, $alpha: .6);
+
+
+        .right_buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .button__garage {
+            width: 238px;
+            height: 54px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: rgba($color: #9B9B9B, $alpha: .5);
+            color: #fff;
+            border-radius: 10px;
+
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+
+            &:hover {
+                background: rgba($color: #9B9B9B, $alpha: .75);
+            }
+
+            &.purple {
+                background: rgba(228, 30, 107, 0.20);
+                color: #E41E6B;
+
+                &:hover {
+                    background: rgba(228, 30, 107, 0.30);
+                }
+            }
+        }
+
+        .garage-slots {
+            text-align: center;
+            margin-top: 15px;
+
+            color: #FFF;
+            font-family: Gilroy;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+
+            .slots-wrapper {
+                justify-content: center;
+                margin-top: 10px;
+                display: flex;
+                gap: 10px;
+
+                span {
+                    padding: 16px;
+
+                    border-radius: 10px;
+                    border: 1px dashed #424565;
+                    background: rgba(155, 155, 155, 0.19);
+                    color: rgba(255, 255, 255, 0.72);
+
+                    b {
+                        color: #FFF;
+                    }
+                }
+            }
+        }
+    }
+
+    ::-webkit-scrollbar {
+        border-radius: 10px;
+        position: absolute;
+        width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: rgba($color: #5c5c5c, $alpha: 1);
+    }
+
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: #FFFFFF;
+    }
+}

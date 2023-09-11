@@ -75,8 +75,8 @@ var cars = new Vue({
     }
 })
 
-mp.events.add('cars_show::CEF', (arr) => {
-    cars.cars = JSON.parse(arr);
-    //mp.trigger('console_cef', JSON.stringify(cars.cars))
-    cars.updateCars();
-});
+// mp.events.add('cars_show::CEF', (arr) => {
+//     cars.cars = JSON.parse(arr);
+//     //mp.trigger('console_cef', JSON.stringify(cars.cars))
+//     cars.updateCars();
+// });
